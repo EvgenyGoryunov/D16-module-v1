@@ -11,7 +11,7 @@
     <meta name="author" content=""/>
     <!-- строка ввода адреса -->
     <title>{% block title %} block title {% endblock title %}</title>
-    <link href="{% static 'styles.css' %}" rel="stylesheet"/>
+    <link href="{% static 'static/styles.css' %}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -29,12 +29,23 @@
                 <!-- кнопки - ссылки на страницы -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/about/">About</a>
+                    <a class="nav-link" href="/about/">Создать</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contacts/">Contact</a>
+                    <a class="nav-link" href="/contacts/">Поиск</a>
                 </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacts/">Отклики</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacts/">Профиль</a>
+                </li>
+
 
             </ul>
         </div>
