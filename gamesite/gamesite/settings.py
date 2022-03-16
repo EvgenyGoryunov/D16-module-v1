@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     # добавили для проекта
     'django.contrib.sites',
     'django.contrib.flatpages',
+
+    'main',
 ]
 
 # добавили для проекта
