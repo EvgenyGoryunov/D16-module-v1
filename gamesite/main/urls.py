@@ -1,11 +1,16 @@
-from django.urls import path, include
+from django.urls import path
 
-# urlpatterns = [
-#
-#     path('main/', include('main.urls')),
-#     path('create/', include('main.urls')),
-#     path('delete/', include('main.urls')),
-#     path('detail/', include('main.urls')),
-#     path('edit/', include('main.urls')),
-#
-# ]
+from .views import *
+
+urlpatterns = [
+    path('', PostMain.as_view(), name='main'),
+    path('create/', PostCreate.as_view(), name='create'),
+    path('delete/', PostDelete.as_view(), name='delete'),
+    path('detail/', PostDetail.as_view(), name='detail'),
+    path('edit/', PostEdit.as_view(), name='edit'),
+    path('search/', PostSearch.as_view(), name='search'),
+
+    path('registration/', UserRegistration.as_view(), name='registration'),
+    path('response/', UserResponse.as_view(), name='response'),
+    path('profile/', UserProfile.as_view(), name='profile'),
+]

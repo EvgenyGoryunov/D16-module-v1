@@ -11,7 +11,8 @@
     <meta name="author" content=""/>
     <!-- строка ввода адреса -->
     <title>{% block title %} block title {% endblock title %}</title>
-    <link href="{% static 'static/styles.css' %}" rel="stylesheet"/>
+    <!-- подгружаем стили css -->
+    <link href="{% static 'styles.css' %}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
     <div class="container">
 
         <!-- название сайта -->
-        <a class="navbar-brand" href="#"> -= Game Site =-</a>
+        <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -29,21 +30,19 @@
                 <!-- кнопки - ссылки на страницы -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/about/">Создать</a>
+                    <a class="nav-link" href="{% url 'create' %}">Создать</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contacts/">Поиск</a>
+                    <a class="nav-link" href="{% url 'search' %}">Поиск</a>
                 </li>
 
-
                 <li class="nav-item">
-                    <a class="nav-link" href="/contacts/">Отклики</a>
+                    <a class="nav-link" href="{% url 'response' %}">Отклики</a>
                 </li>
 
-
                 <li class="nav-item">
-                    <a class="nav-link" href="/contacts/">Профиль</a>
+                    <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
                 </li>
 
 
