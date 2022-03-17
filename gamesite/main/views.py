@@ -30,9 +30,16 @@ class PostDetail(DetailView):
 
 
 class PostEdit(UpdateView):
-    # def get(self, request):
-    #     return HttpResponse(render(request, 'post_edit.html', ))
-    pass
+    template_name = 'post_edit.html'
+    form_class = PostForm
+    success_url = '/'
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Post.objects.get(pk=id)
+
+
+
 
 class PostSearch(ListView):
     # def get(self, request):
