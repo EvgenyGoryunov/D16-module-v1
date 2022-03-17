@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,16 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # добавили для проекта
     'django.contrib.sites',
     'django.contrib.flatpages',
-
     # главное приложение
     'main',
-
     # регистрация пользователей
     'sign',
+    # загрузчик медиа
+    # https://github.com/django-ckeditor/django-ckeditor
+    'ckeditor',
+    'ckeditor_uploader',
+
 ]
 
 # добавили для проекта
@@ -126,14 +130,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 #
 # STATICFILES_DIRS = [
 #     BASE_DIR / "static"
 # ]
+

@@ -1,3 +1,5 @@
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -14,6 +16,8 @@ class Post(models.Model):
     """Модель - объявления
      поле контент может содержать текст, фото, видео, документ"""
     title = models.CharField(max_length=128, verbose_name='Название')
+    cont = RichTextField(blank=True, null=True)
+    cont_up = RichTextUploadingField(blank=True, null=True)
     content = models.TextField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
