@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, request
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .forms import PostForm
@@ -37,6 +37,17 @@ class PostEdit(UpdateView):
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
+
+    # if request.method == 'POST':
+    #     form = PostForm(request.POST, instance=id)
+    #
+    #     if form.is_valid():
+    #         form.save()
+    #
+    #         return redirect('edit')
+    # else:
+    #     form = PostForm(instance=id)
+
 
 
 
