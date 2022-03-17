@@ -5,8 +5,11 @@ from .models import Post
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title',
-                  'content',
-                  'user',
-                  'category',
-                  ]
+        fields = '__all__'
+        # fields = ['title',
+        #           'content',
+        #           'cont',
+        #           'cont_up',
+        #           'user',
+        #           'category',
+        #           ]

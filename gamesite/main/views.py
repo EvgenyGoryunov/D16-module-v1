@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .forms import PostForm
 from .models import Post
@@ -48,21 +48,36 @@ class PostCreate(CreateView):
 
 
 
-class PostDelete(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'post_delete.html', ))
+class PostDelete(DeleteView):
+    # def get(self, request):
+    #     return HttpResponse(render(request, 'post_delete.html', ))
+    pass
 
-class PostDetail(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'post_detail.html', ))
+class PostDetail(DetailView):
+    template_name = 'post_detail.html'
+    queryset = Post.objects.all()
 
-class PostEdit(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'post_edit.html', ))
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     id = self.kwargs.get('pk')
+    #     qwe = Category.objects.filter(pk=Post.objects.get(pk=id).category.id).values("subscribers__username")
+    #     context['is_not_subscribe'] = not qwe.filter(subscribers__username=self.request.user).exists()
+    #     context['is_subscribe'] = qwe.filter(subscribers__username=self.request.user).exists()
+    #     return context
 
-class PostSearch(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'post_search.html', ))
+    #
+    # def get(self, request):
+    #     return HttpResponse(render(request, 'post_detail.html', ))
+
+class PostEdit(UpdateView):
+    # def get(self, request):
+    #     return HttpResponse(render(request, 'post_edit.html', ))
+    pass
+
+class PostSearch(ListView):
+    # def get(self, request):
+    #     return HttpResponse(render(request, 'post_search.html', ))
+    pass
 
 
 
