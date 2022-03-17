@@ -2,6 +2,22 @@
 
 {% extends 'static/default.html' %}
 
-{% block title %} Подробности объявления {% endblock title %}
+{% block title %} Подробности объявления - {{ post.title }} {% endblock title %}
 
-{% block content %} Подробности объявления {% endblock content %}
+{% block content %}
+<br>
+<br>
+Подробности объявления
+<br>
+<br>
+-= {{ post.title }} =-
+<br>
+<br>
+<br>
+- объявление №{{ post.pk }}; автор: {{ post.user }}; категория: {{ post.category }}; дата создания: {{ post.dateCreation }} -
+<br>
+<br>
+<a href="{% url 'edit' post.id %}"><u>Редактировать</u></a>
+<a href="{% url 'delete' post.id %}"><u>Удалить</u></a>
+
+{% endblock content %}
