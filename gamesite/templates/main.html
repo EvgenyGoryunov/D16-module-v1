@@ -4,4 +4,20 @@
 
 {% block title %} Все объявления {% endblock title %}
 
-{% block content %} Все объявления {% endblock content %}
+{% block content %}
+Все объявления
+
+{% for post in posts %}
+<br>
+<br>
+<!-- При нажатии на имя нас теперь будет перекидывать на страницу самого товара -->
+<br>
+<h6>{{ post.title | truncatechars:250 }}</h6>
+<br>
+<hr>
+<hr>
+
+{% endfor %}
+
+
+{% endblock content %}

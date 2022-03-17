@@ -1,0 +1,1 @@
+<!--<h3><a href="{% url 'news_detail' post.id %}"><u>{{ post }}</u></a></h3>-->
