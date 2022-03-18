@@ -1,6 +1,8 @@
-from django.http import HttpResponse, request
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+"""************************************************* ПРЕДСТАВЛЕНИЯ  ************************************************"""
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .forms import NoteForm
@@ -8,6 +10,7 @@ from .models import Note
 
 
 class NoteMain(ListView):
+    """Главная страница, вывод в виде списка всех объявлений"""
     model = Note
     template_name = 'main.html'
     context_object_name = 'notes'
@@ -16,6 +19,7 @@ class NoteMain(ListView):
 
 
 class NoteCreate(CreateView):
+    """Создание нового объявления"""
     template_name = 'note_create.html'
     form_class = NoteForm
 
@@ -26,18 +30,21 @@ class NoteCreate(CreateView):
 
 
 class NoteDelete(DeleteView):
-    """reverse_lazy('main') - перенаправление на представление с именем 'main'"""
+    """Удаление объявления"""
+    # reverse_lazy('main') - перенаправление url с name = 'main'
     template_name = 'note_delete.html'
     queryset = Note.objects.all()
     success_url = reverse_lazy('main')
 
 
 class NoteDetail(DetailView):
+    """Вывод подробностей объявления"""
     template_name = 'note_detail.html'
     queryset = Note.objects.all()
 
 
 class NoteEdit(UpdateView):
+    """Редактирование объявления"""
     template_name = 'note_edit.html'
     form_class = NoteForm
 
@@ -47,6 +54,7 @@ class NoteEdit(UpdateView):
 
 
 class NoteSearch(ListView):
+    """Фильтр и поиск объявлений"""
     def get(self, request):
         return HttpResponse(render(request, 'note_search.html', ))
     # pass
