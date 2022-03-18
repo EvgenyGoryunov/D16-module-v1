@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'sign',
     # загрузчик медиа
     # https://github.com/django-ckeditor/django-ckeditor
+    # https://www.youtube.com/watch?v=Rh7THG1-THU - смотреть настройку здесь
     'ckeditor',
     'ckeditor_uploader',
 

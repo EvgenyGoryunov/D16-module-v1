@@ -9,17 +9,6 @@
 <script type="text/javascipt" scr="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 
 {% block content %}
-<br>
-
-<hr>
-<br>
-{{ post.title }}, {{ post.content }}, {{ post.cont|safe  }}, {{ post.cont_up|safe }}
-<br>
-<br>
-- объявление №{{ post.pk }}; автор: {{ post.user }}; категория: {{ post.category }}; дата создания: {{ post.dateCreation }} -
-<br>
-<br>
-
 
 <hr>
 <br>
@@ -33,7 +22,11 @@
     {{ form.as_p }}
     <input type="submit" value="Сохранить изменения">
 </form>
-
+<br>
+<br>
+- объявление №{{ post.pk }}; дата создания: {{ post.dateCreation }} -
+<br>
+<br>
 <br>
 <br>
 <br>

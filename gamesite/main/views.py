@@ -1,5 +1,6 @@
 from django.http import HttpResponse, request
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .forms import PostForm
@@ -16,7 +17,7 @@ class PostMain(ListView):
 class PostCreate(CreateView):
     template_name = 'post_create.html'
     form_class = PostForm
-    success_url = '/'
+    # success_url = '/'
 
 
 class PostDelete(DeleteView):
@@ -32,21 +33,44 @@ class PostDetail(DetailView):
 class PostEdit(UpdateView):
     template_name = 'post_edit.html'
     form_class = PostForm
-    success_url = '/'
+
+    # success_url = '/'
+    # success_url = reverse('detail')
+    # if
+    #     success_url = reverse_lazy('main')
+
 
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
 
-    # if request.method == 'POST':
-    #     form = PostForm(request.POST, instance=id)
-    #
+
+
+    # success_url = f'/detail/{self.kwargs.get("pk")}'
+    # success_url = f'/detail/{id}'
+
+    # def form_valid(self, form, **kwargs):
+    #     id = self.kwargs.get('pk')
     #     if form.is_valid():
     #         form.save()
-    #
-    #         return redirect('edit')
-    # else:
-    #     form = PostForm(instance=id)
+    #         return redirect('detail')
+            # return redirect(f'/detail/{id}')
+        # else:
+
+
+
+        # return redirect('create')
+
+
+        # if request.method == 'POST':
+        #     form = PostForm(request.POST, instance=Post)
+        #
+        #     if form.is_valid():
+        #         form.save()
+        #
+        #         return redirect('edit')
+        # else:
+        #     form = PostForm(instance=Post)
 
 
 

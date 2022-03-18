@@ -2,3 +2,16 @@
 
 | truncatechars:250
 <h6>{{ post.title | truncatechars:250 }}</h6>
+
+
+# cont = RichTextField(blank=True, null=True)
+# content = models.TextField(verbose_name='Контент')
+from ckeditor.fields import RichTextField
+
+        # fields = ['title',
+        #           'content',
+        #           'cont',
+        #           'cont_up',
+        #           'user',
+        #           'category',
+        #           ]

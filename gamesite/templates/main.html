@@ -12,7 +12,7 @@
 <br>
 <!-- При нажатии на имя нас теперь будет перекидывать на страницу самого товара -->
 <br>
-<h6>{{ post.title }}, {{ post.cont|safe  }}, {{ post.cont_up|safe }}</h6>
+<h6>{{ post.title }}, {{ post.content|safe  }}</h6>
 <h3><a href="{% url 'detail' post.id %}"><u>{{ post }}</u></a></h3>
 
 <br>
