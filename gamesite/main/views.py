@@ -30,7 +30,7 @@ class NoteCreate(CreateView):
 
 class NoteDelete(DeleteView):
     """Удаление объявления"""
-    # reverse_lazy('main') - перенаправление url с name = 'main'
+    # reverse_lazy('main') - перенаправление на url с name = 'main'
     template_name = 'note_delete.html'
     queryset = Note.objects.all()
     success_url = reverse_lazy('main')
@@ -48,6 +48,7 @@ class NoteEdit(UpdateView):
     form_class = NoteForm
 
     def get_object(self, **kwargs):
+        """Помогает извлечь у объекта нужное значение поля"""
         id = self.kwargs.get('pk')
         return Note.objects.get(pk=id)
 
