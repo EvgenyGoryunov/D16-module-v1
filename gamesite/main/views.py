@@ -1,10 +1,9 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ  ************************************************"""
 
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
+from .filter import NoteFilter
 from .forms import NoteForm
 from .models import Note
 
@@ -55,6 +54,13 @@ class NoteEdit(UpdateView):
 
 class NoteSearch(ListView):
     """Фильтр и поиск объявлений"""
-    def get(self, request):
-        return HttpResponse(render(request, 'note_search.html', ))
-    # pass
+    model = Note
+    template_name = 'note_search.html'
+    context_object_name = 'note'
+    ordering = ['-dateCreation']
+
+    def get_context_data(self, **kwargs):
+        """Для добавления новой переменной на страницу, filter"""
+        context = super().get_context_data(**kwargs)
+        context['filter'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        return context
