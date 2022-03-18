@@ -14,7 +14,7 @@ class NoteMain(ListView):
     template_name = 'main.html'
     context_object_name = 'notes'
     ordering = ['-dateCreation']
-    # paginate_by = 5
+    paginate_by = 5
 
 
 class NoteCreate(CreateView):
