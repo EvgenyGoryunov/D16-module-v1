@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
-from .forms import PostForm
+from .forms import NoteForm
 from .models import Note
 
 
@@ -16,7 +16,7 @@ class NoteMain(ListView):
 
 class NoteCreate(CreateView):
     template_name = 'note_create.html'
-    form_class = PostForm
+    form_class = NoteForm
     # form = PostForm(request.POST)
     # if form.is_valid():
     #     response = form.save(commit=False)
@@ -41,7 +41,7 @@ class NoteDetail(DetailView):
 
 class NoteEdit(UpdateView):
     template_name = 'note_edit.html'
-    form_class = PostForm
+    form_class = NoteForm
 
     # success_url = '/'
     # success_url = reverse('detail')
@@ -86,9 +86,9 @@ class NoteEdit(UpdateView):
 
 
 class NoteSearch(ListView):
-    # def get(self, request):
-    #     return HttpResponse(render(request, 'note_search.html', ))
-    pass
+    def get(self, request):
+        return HttpResponse(render(request, 'note_search.html', ))
+    # pass
 
 
 

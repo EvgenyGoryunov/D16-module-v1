@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from .models import Note
 
 
-class PostForm(ModelForm):
+class NoteForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         """задает название пустого поля"""
