@@ -9,11 +9,11 @@
 <h3>Все объявления</h3>
 <br>
 <br>
-{% for post in posts %}
-<h5><a href="{% url 'detail' post.id %}"><u>{{ post.title }}</u></a></h5>
+{% for note in notes %}
+<h5><a href="{% url 'detail' note.id %}"><u>{{ note.title }}</u></a></h5>
 <br>
 <br>
-<h6>{{ post.content|safe  }}</h6>
+<h6>{{ note.content|safe  }}</h6>
 <br>
 <hr>
 <hr>

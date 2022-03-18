@@ -4,34 +4,43 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .forms import PostForm
-from .models import Post
+from .models import Note
 
 
-class PostMain(ListView):
-    model = Post
+class NoteMain(ListView):
+    model = Note
     template_name = 'main.html'
-    context_object_name = 'posts'  # (3)
+    context_object_name = 'notes'  # (3)
     ordering = ['-dateCreation']
     # paginate_by = 5
 
-class PostCreate(CreateView):
-    template_name = 'post_create.html'
+class NoteCreate(CreateView):
+    template_name = 'note_create.html'
     form_class = PostForm
-    # success_url = '/'
+    # form = PostForm(request.POST)
+    # if form.is_valid():
+    #     response = form.save(commit=False)
+    #     response.user = request.user
+    #     response.save()
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+        # project = Project.objects.get(slug=self.kwargs['project_slug'])
+        # form.instance.project = project
+        # return super(ResponseCreate, self).form_valid(form)
 
 
-class PostDelete(DeleteView):
+class NoteDelete(DeleteView):
     # def get(self, request):
-    #     return HttpResponse(render(request, 'post_delete.html', ))
+    #     return HttpResponse(render(request, 'note_delete.html', ))
     pass
 
-class PostDetail(DetailView):
-    template_name = 'post_detail.html'
-    queryset = Post.objects.all()
+class NoteDetail(DetailView):
+    template_name = 'note_detail.html'
+    queryset = Note.objects.all()
 
 
-class PostEdit(UpdateView):
-    template_name = 'post_edit.html'
+class NoteEdit(UpdateView):
+    template_name = 'note_edit.html'
     form_class = PostForm
 
     # success_url = '/'
@@ -42,7 +51,7 @@ class PostEdit(UpdateView):
 
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
-        return Post.objects.get(pk=id)
+        return Note.objects.get(pk=id)
 
 
 
@@ -76,9 +85,9 @@ class PostEdit(UpdateView):
 
 
 
-class PostSearch(ListView):
+class NoteSearch(ListView):
     # def get(self, request):
-    #     return HttpResponse(render(request, 'post_search.html', ))
+    #     return HttpResponse(render(request, 'note_search.html', ))
     pass
 
 

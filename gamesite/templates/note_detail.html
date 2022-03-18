@@ -10,18 +10,18 @@
 Подробности объявления
 <br>
 <br>
--= {{ post.title }} =-
+-= {{ note.title }} =-
 <br>
 <hr>
 <br>
-{{ post.title }}, {{ post.content|safe  }}
+{{ note.content|safe  }}
 <br>
 <br>
-- объявление №{{ post.pk }}; автор: {{ post.user }}; категория: {{ post.category }}; дата создания: {{ post.dateCreation }} -
+- объявление №{{ note.pk }}; автор: {{ note.user }}; категория: {{ note.category }}; дата создания: {{ note.dateCreation }} -
 <br>
 <br>
-<a href="{% url 'edit' post.id %}"><u>Редактировать</u></a>
-<a href="{% url 'delete' post.id %}"><u>Удалить</u></a>
+<a href="{% url 'edit' note.id %}"><u>Редактировать</u></a>
+<a href="{% url 'delete' note.id %}"><u>Удалить</u></a>
 <br>
 <br>
 <br>

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post
+from .models import Note
 
 
 class PostForm(ModelForm):
@@ -11,8 +11,14 @@ class PostForm(ModelForm):
         self.fields['category'].empty_label = 'Категория не выбрана'
 
     class Meta:
-        model = Post
+        model = Note
         fields = '__all__'
+        # widgets = {'user': forms.HiddenInput()}
+
+        # fields = ['title',
+        #           'content',
+        #           'category',
+        #           ]
         # вывод размеров полей
         # widgets = {'title': forms.TextInput({'class': 'form-input'}),
         #            'content': forms.Textarea({'cols': 500, 'rows': 100}),

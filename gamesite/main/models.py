@@ -9,16 +9,19 @@ class Category(models.Model):
     name = models.CharField(max_length=64, unique=True, verbose_name='Название')
 
     def __str__(self):
+        """вид отображения модели в панели управления"""
         return f'{self.name}'
 
 
-class Post(models.Model):
-    """Модель - объявления
+class Note(models.Model):
+    """Модель - notes объявления
      поле контент может содержать текст, фото, видео, документ"""
     title = models.CharField(max_length=128, verbose_name='Название')
     content = RichTextUploadingField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, default=User.username, verbose_name='Пользователь')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
 
     def __str__(self):
@@ -32,7 +35,7 @@ class Post(models.Model):
 
 class Response(models.Model):
     """Модель - отклики"""
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Название')
+    post = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='Название')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     content = models.TextField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
