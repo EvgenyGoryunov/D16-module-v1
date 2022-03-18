@@ -16,7 +16,7 @@ class Post(models.Model):
     """Модель - объявления
      поле контент может содержать текст, фото, видео, документ"""
     title = models.CharField(max_length=128, verbose_name='Название')
-    content = RichTextUploadingField(blank=True, null=True, verbose_name='Контент')
+    content = RichTextUploadingField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
