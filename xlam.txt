@@ -8,6 +8,7 @@
 # content = models.TextField(verbose_name='Контент')
 from ckeditor.fields import RichTextField
 
+
         # fields = ['title',
         #           'content',
         #           'cont',
