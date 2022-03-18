@@ -11,7 +11,8 @@
 <br>
 <form align="left" method="post">
     {% csrf_token %}
-    {{ form.as_p }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    {{ form.media }}
+    {{ form.as_p }}
     <input type="submit" value="Добавить объявление">
 </form>
 
