@@ -24,6 +24,10 @@
             <h5>Название</h5>
         </td>
 
+        <td width="100">
+            <h5>Автор</h5>
+        </td>
+
         <td width="150">
             <h5>Категория</h5>
         </td>
@@ -42,6 +46,11 @@
         <td>
             <p align="center">{{ note.category }}</p>
         </td>
+
+        <td>
+            <p align="center">{{ note.user }}</p>
+        </td>
+
 
         <td>
             <p align="center">{{ note.dateCreation | date:"d M Y" }}</p>

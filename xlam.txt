@@ -17,32 +17,3 @@ from ckeditor.fields import RichTextField
         #           ]
 
 
-
-<table cellspacing="5" cellpadding="10" border="1"
-       style=" border-spacing : 10px; border-color : blue; border-style: solid;" bgcolor="FFFFFF">
-    <tr>
-        <td width="400">
-            <h5>Название</h5>
-        </td>
-        <td width="130">
-            <h5>Дата</h5>
-        </td>
-        <td>
-            <h5>Содержание</h5>
-        </td>
-    </tr>
-    {% for note in filter.qs %}
-    <tr>
-        <td>
-            <p align="left"><a href="{% url 'note_detail' note.id %}"><u>{{ note|truncatechars:60 }}</u></a></p>
-        </td>
-
-        <td>
-            <p align="center">{{ note.dateCreation |date:"d M Y" }}</p>
-        </td>
-        <td>
-            <p align="left">{{ note.title|truncatewords:20 }}</p>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
