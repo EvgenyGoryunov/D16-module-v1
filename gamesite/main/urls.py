@@ -12,4 +12,6 @@ urlpatterns = [
       path('edit/<int:pk>', NoteEdit.as_view(), name='edit'),
       path('search/', NoteSearch.as_view(), name='search'),
       path('ckeditor', include('ckeditor_uploader.urls')),
+      path('<int:pk>/add_subscribe/', add_response, name='add_response'),
+      path('<int:pk>/del_subscribe/', delete_response, name='delete_response'),
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

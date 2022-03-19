@@ -65,3 +65,19 @@ class NoteSearch(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
         return context
+
+
+# def add_response(request):
+#     pk = request.GET.get('pk', )
+#     print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
+#     Category.objects.get(pk=pk).subscribers.add(request.user)
+#     return redirect('/news/')
+#     pass
+#
+#
+# def delete_response(request):
+#     pk = request.GET.get('pk', )
+#     print('Пользователь', request.user, 'удален из подписчиков категории:', Category.objects.get(pk=pk))
+#     Category.objects.get(pk=pk).subscribers.remove(request.user)
+#     return redirect('/news/')
+#     pass
