@@ -4,45 +4,31 @@
 
 {% block title %} Подробности объявления - {{ note.title }} {% endblock title %}
 
-{% block content %}
-<br>
-<h3>Подробности объявления</h3>
-<br>
-<br>
--= {{ note.title }} =-
-<br>
+{% block content %}<br>
+
+<h3>Подробности объявления</h3><br><br>
+
+-= {{ note.title }} =-<br>
 <hr>
-<br>
-{{ note.content | safe }}
-<br>
-<br>
-- объявление №{{ note.pk }}; автор: {{ note.user }}; категория: {{ note.category }}; дата создания: {{ note.dateCreation }} -
-<br>
-<br>
+{{ note.content | safe }}<br><br>
+
+- объявление №{{ note.pk }}; автор: {{ note.user }}; категория: {{ note.category }}; дата создания: {{ note.dateCreation }} -<br><br>
+
 <a href="{% url 'edit' note.id %}"><u>Редактировать</u></a>
-<a href="{% url 'delete' note.id %}"><u>Удалить</u></a>
-<br>
-<br>
+<a href="{% url 'delete' note.id %}"><u>Удалить</u></a><br><br><br>
+
+<h6>Форма добавления отклика</h6><br>
 
 <form method="POST">
     {% csrf_token %}
-    будущая форма передачи текстового сообщения
-    {{ form.as_p }}
+    {{ form.content }}
     <input type="submit" value="Оставить отклик">
-</form>
+</form><br><br>
 
+<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>
 
-
-<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button>
-
-<br>
-<br>
 <hr>
 {% endblock content %}
-
-
-
-
 <hr>
 {% if is_not_subscribe %}
 <!--GET запрос, который передает в наше представление значение категории, переменная post.category.id, -->

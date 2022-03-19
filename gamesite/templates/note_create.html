@@ -11,8 +11,10 @@
 <br>
 <form align="left" method="post">
     {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
+    {{ form.title }}<br>
+    {{ form.media }}<br>
+    {{ form.content }}<br><br>
+    {{ form.category }}<br><br>
     <input type="submit" value="Добавить объявление">
 </form>
 <br>

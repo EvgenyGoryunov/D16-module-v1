@@ -8,28 +8,20 @@
 <script type="text/javascipt" scr="{% static 'ckeditor/ckeditor-init.js' %}"></script>
 <script type="text/javascipt" scr="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 
+
 {% block content %}
 
-<br>
-<h3>Редактировать объявление</h3>
-<br>
-<br>
+<br><h3>Редактировать объявление</h3><br><br>
 
 <form align="left" method="POST">
     {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
+    {{ form.title }}<br>
+    {{ form.media }}<br>
+    {{ form.content }}<br><br>
+    {{ form.category }}<br><br>
     <input type="submit" value="Сохранить изменения">
-</form>
+</form><br><br>
 
-<br>
-<br>
-- объявление №{{ post.pk }}; дата создания: {{ post.dateCreation }} -
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+- объявление №{{ note.pk }}; дата создания: {{ note.dateCreation }} -<br><br><br>
+
 {% endblock content %}

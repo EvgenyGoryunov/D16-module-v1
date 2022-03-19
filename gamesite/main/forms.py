@@ -12,15 +12,18 @@ class NoteForm(ModelForm):
 
     class Meta:
         """__all__ - значит вывести все поля, exclude - исключает указанное поле
-        widgets - переопределение размера вывода поля на страницу"""
+        widgets/size - переопределение размера вывода поля на страницу
+        widgets/placeholder - текст в пустом поле"""
         model = Note
         fields = '__all__'
         exclude = ['user']
-        widgets = {'title': TextInput(attrs={'size': 98}), }
+        widgets = {'title': TextInput(attrs={'size': 98, 'placeholder': 'Название объявления'})}
 
 
 class ResponseForm(ModelForm):
     """Форма создания отклика"""
+
     class Meta:
         model = Response
         fields = ['content']
+        widgets = {'content': TextInput(attrs={'size': 50, 'placeholder': 'Введите свой e-mail'})}
