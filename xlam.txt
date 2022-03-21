@@ -45,3 +45,89 @@ class AuthorForm(ModelForm):
 <!--<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>-->
 
 action ="{% url 'Test' }"
+
+
+            # error = ''
+            # form.instance.user = self.request.user
+            # print(type(id))
+            # print(request.__dict__)
+            # form.instance.notenote = id
+            # form.instance.note = id
+            # form.instance.note = self.kwargs.get('pk')
+            # form.instance.note = self.request.note
+
+        # else:
+        #     error = 'ERROR'
+        # form = ResponseForm()
+        # data = {'form': form, 'error': error}
+        # return render(request, '/', data)
+
+    # def test(self, request):
+    #     print('11111')
+    #     if request.method == 'POST':
+    #         print('222')
+    #         form = ResponseForm(request.POST)
+    #         if form.is_valid():
+    #             print('333')
+    #             form.save()
+
+
+def test(request):
+    form = Test()
+
+    # error = ''
+    # if request.method == 'POST':
+    #     form = ResponseForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('main')
+    #     else:
+    #         error = 'ERROR'
+    # form = ResponseForm()
+    # data = {'form': form, 'error': error}
+    # return render(request, '/', data)
+
+    # def get_object(self, **kwargs):
+    #     """Помогает извлечь у объекта нужное значение поля и сам объект"""
+    #     id = self.kwargs.get('pk')
+    #     print('333333333')
+    #     return Note.objects.get(pk=id)
+
+    # def form_valid(self, ResponseForm):
+    #     """Автозаполнение поля user"""
+    #     print('111111111111111111111111111111111111111')
+    #     # ResponseForm.instance.user = self.request.user
+    #     # ResponseForm.instance.note = self.request.user
+    #     return super().form_valid(ResponseForm)
+
+      # path('test/', Test, name='test'),
+      # path('<int:pk>/add_response/', add_response, name='add_response'),
+      # path('<int:pk>/delete_response/', delete_response, name='delete_response'),
+
+            # pk = 13
+            # Response.objects.get(pk=pk).note_id.add(id)
+            # Response.objects.get(pk=pk).note_id.add(request.user)
+
+            print('555')
+
+            # Response.objects.create(note_id=2, user_id='2', content='333content')
+
+
+class Test(forms.Form):
+    content = forms.CharField(max_length=255)
+    # content = forms.EmailField(max_length=255)
+    user = forms.CharField(max_length=255)
+    note = forms.ModelChoiceField(queryset=Note.objects.all())
+    # note = forms.ModelChoiceField(Note)
+
+            print('222')
+
+
+            # id = self.kwargs.get('pk')
+            print(id)
+
+
+    # success_url = reverse_lazy('main')
+
+    #
+            # fields = ['content', 'user', 'note']

@@ -14,9 +14,9 @@ class Category(models.Model):
 
 
 class Note(models.Model):
-    """Модель - notes объявления
-     поле контент может содержать текст, фото, видео, документ
-     поле user авто присваивает значение текущего пользователя"""
+    """Модель - объявления
+    поле контент может содержать текст, фото, видео, документы
+    поле user авто присваивает значение текущего пользователя"""
     title = models.CharField(max_length=128, verbose_name='Название')
     content = RichTextUploadingField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -28,14 +28,14 @@ class Note(models.Model):
 
     def get_absolute_url(self):
         """Функция перенаправления пользователя после успешного добавления или изменения в бд
-        в данном случае - обратиться к url с именем detail, передав pk = id"""
+        в данном случае - обратиться к url с именем detail, передав pk = id, и далее по списку..."""
         return reverse('detail', kwargs={'pk': self.id})
 
 
 class Response(models.Model):
     """Модель - отклики"""
-    note = models.ForeignKey(Note, blank=True, null=True, on_delete=models.CASCADE, verbose_name='id_объявления')
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='id_пользователь')
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователь')
     content = models.TextField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
