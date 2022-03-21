@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 
 from .filter import NoteFilter
 from .forms import NoteForm, ResponseForm
-from .models import Note
+from .models import *
 
 
 class NoteMain(ListView):
@@ -31,8 +31,12 @@ class NoteCreate(CreateView):
 class NoteDelete(DeleteView):
     """Удаление объявления"""
     template_name = 'note_delete.html'
+    # queryset - переопределение вывода инфы на страницу
     queryset = Note.objects.all()
-    # перенаправление на url с name = 'main'
+    # success_url - перенаправление на url с name = 'main'
+    # reverse_lazy - ленивая переадресация, то есть выполняется после всего
+    # выполнения всего кода, если просто reverse написать, то мгновенно переведет
+    # не успев нижний код исполнить
     success_url = reverse_lazy('main')
 
 
@@ -50,6 +54,8 @@ class NoteDetail(DetailView):
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user = self.request.user
+            print(self.request.user)
+            print(self.request.user.id)
             print('222')
             form.save()
             print('333')
@@ -81,17 +87,14 @@ class NoteSearch(ListView):
         return context
 
 
-def add_response(request):
-    # pk = request.GET.get('pk', )
-    # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
-    # Category.objects.get(pk=pk).subscribers.add(request.user)
-    # return redirect('/news/')
-    pass
+class ResponseList(ListView):
+    """Главная страница, вывод в виде списка всех объявлений"""
+    # model = Response
+    template_name = 'user_response.html'
+    context_object_name = 'responses'
+    ordering = ['-dateCreation']
+    paginate_by = 5
 
-
-def delete_response(request):
-    # pk = request.GET.get('pk', )
-    # print('Пользователь', request.user, 'удален из подписчиков категории:', Category.objects.get(pk=pk))
-    # Category.objects.get(pk=pk).subscribers.remove(request.user)
-    # return redirect('/news/')
-    pass
+    def get_queryset(self):
+        user_id = self.request.user.id
+        return Response.objects.filter(user_id=user_id)
