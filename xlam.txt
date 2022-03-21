@@ -17,3 +17,24 @@ from ckeditor.fields import RichTextField
         #           ]
 
 
+    def get_context_data(self, **kwargs):
+        """Для добавления новой переменной на страницу (filter)"""
+        context = super().get_context_data(**kwargs)
+        context['filter'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+            'name': Textarea(attrs={'cols': 80, 'rows': 20}),
+
+from django.forms import ModelForm, Textarea
+from myapp.models import Author
+
+class AuthorForm(ModelForm):
+    class Meta:
+        model = Author
+        fields = ('name', 'title', 'birth_date')
+        widgets = {
+            'name': Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
+
+            {{ form.note }}
+    {{ form.user }}

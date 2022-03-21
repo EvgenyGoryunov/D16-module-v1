@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm, TextInput, Textarea
 from .models import Note, Response
 
@@ -26,4 +27,13 @@ class ResponseForm(ModelForm):
     class Meta:
         model = Response
         fields = ['content']
+        # fields = ['content', 'user', 'note']
         widgets = {'content': TextInput(attrs={'size': 50, 'placeholder': 'Введите свой e-mail'})}
+
+
+class Test(forms.Form):
+    content = forms.CharField(max_length=255)
+    # content = forms.EmailField(max_length=255)
+    user = forms.CharField(max_length=255)
+    note = forms.ModelChoiceField(queryset=Note.objects.all())
+    # note = forms.ModelChoiceField(Note)

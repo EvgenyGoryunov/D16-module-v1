@@ -1,10 +1,10 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ  ************************************************"""
-
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .filter import NoteFilter
-from .forms import NoteForm, ResponseForm
+from .forms import NoteForm, ResponseForm, Test
 from .models import Note
 
 
@@ -30,9 +30,9 @@ class NoteCreate(CreateView):
 
 class NoteDelete(DeleteView):
     """Удаление объявления"""
-    # reverse_lazy('main') - перенаправление на url с name = 'main'
     template_name = 'note_delete.html'
     queryset = Note.objects.all()
+    # перенаправление на url с name = 'main'
     success_url = reverse_lazy('main')
 
 
@@ -40,24 +40,87 @@ class NoteDetail(DetailView):
     """Вывод подробностей объявления"""
     template_name = 'note_detail.html'
     queryset = Note.objects.all()
+    # вариант2 добавления переменной в контекст шаблона
+    # extra_context = {'form': ResponseForm}
+    #
+    # def post(self, request, *args, **kwargs):
+    #     error = ''
+    #     form = ResponseForm(request.POST)
+    #     print('111')
+    #     if form.is_valid():
+    #         print('222')
+    #         form.instance.user = self.request.user
+    #         print('333')
+    #         id = self.kwargs.get('pk')
+    #         # print(id)
+    #         # print(type(id))
+    #         # print(request.__dict__)
+    #         form.instance.notenote = id
+    #         # form.instance.note = id
+    #         # form.instance.note = self.kwargs.get('pk')
+    #         # form.instance.note = self.request.note
+    #
+    #         print('444')
+    #         form.save()
+    #         print('555')
+    #         return redirect('main')
 
-    def get_object(self, **kwargs):
-        """Помогает извлечь у объекта нужное значение поля и сам объект"""
-        id = self.kwargs.get('pk')
-        return Note.objects.get(pk=id)
+        # else:
+        #     error = 'ERROR'
+        # form = ResponseForm()
+        # data = {'form': form, 'error': error}
+        # return render(request, '/', data)
 
-    def get_context_data(self, **kwargs):
-        """Для добавления новой переменной на страницу (form)"""
-        context = super().get_context_data(**kwargs)
-        context['form'] = ResponseForm
-        return context
 
-    def form_valid(self, ResponseForm):
-        """Автозаполнение поля user"""
-        print('111111111111111111111111111111111111111')
-        # ResponseForm.instance.user = self.request.user
-        # ResponseForm.instance.note = self.request.user
-        # return super().form_valid(ResponseForm)
+
+    # def test(self, request):
+    #     print('11111')
+    #     if request.method == 'POST':
+    #         print('222')
+    #         form = ResponseForm(request.POST)
+    #         if form.is_valid():
+    #             print('333')
+    #             form.save()
+
+
+
+
+
+
+def test(request):
+    form = Test()
+
+
+
+
+
+    # error = ''
+    # if request.method == 'POST':
+    #     form = ResponseForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('main')
+    #     else:
+    #         error = 'ERROR'
+    # form = ResponseForm()
+    # data = {'form': form, 'error': error}
+    # return render(request, '/', data)
+
+
+
+    # def get_object(self, **kwargs):
+    #     """Помогает извлечь у объекта нужное значение поля и сам объект"""
+    #     id = self.kwargs.get('pk')
+    #     print('333333333')
+    #     return Note.objects.get(pk=id)
+
+
+    # def form_valid(self, ResponseForm):
+    #     """Автозаполнение поля user"""
+    #     print('111111111111111111111111111111111111111')
+    #     # ResponseForm.instance.user = self.request.user
+    #     # ResponseForm.instance.note = self.request.user
+    #     return super().form_valid(ResponseForm)
 
 
 class NoteEdit(UpdateView):

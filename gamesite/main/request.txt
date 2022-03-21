@@ -1,0 +1,75 @@
+
+environ : {'INTELLIJ IDEA COMMUNITY EDITION': 'C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'TERM_SESSION_ID': '3e023bef-8d75-4772-853f-ae3e6bb5452c', 'COMMONPRO
+GRAMW6432': 'C:\\Program Files\\Common Files', 'PROGRAMW6432': 'C:\\Program Files', 'USERNAME': 'User', 'USERPROFILE': 'C:\\Users\\User', 'ALLUSERSPROFILE': 'C:\\ProgramData', 'PROCESSOR_REVISION
+': '3001', 'IDEA_INITIAL_DIRECTORY': 'C:\\Windows\\system32', 'FPS_BROWSER_APP_PROFILE_STRING': 'Internet Explorer', 'PUBLIC': 'C:\\Users\\Public', 'PATH': 'C:\\pythonProject\\D16-module-v1\\venv
+/Scripts;C:\\pythonProject\\D16-module-v1\\venv\\Scripts;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\Open
+SSH\\;C:\\Program Files\\Git\\cmd;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\;C:\\Users\\User\\AppData\\
+Local\\Microsoft\\WindowsApps;;C:\\Program Files\\JetBrains\\PyCharm Community Edition 2021.3\\bin;;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'DRIVERDATA': 'C
+:\\Windows\\System32\\Drivers\\DriverData', 'HOMEDRIVE': 'C:', 'SESSIONNAME': 'Console', 'TERMINAL_EMULATOR': 'JetBrains-JediTerm', 'LOGONSERVER': '\\\\COMP-LENOVO-TAI', 'SYSTEMROOT': 'C:\\Window
+s', 'HOMEPATH': '\\Users\\User', 'VIRTUAL_ENV': 'C:\\pythonProject\\D16-module-v1\\venv', '_OLD_VIRTUAL_PROMPT': '$P$G', 'LOCALAPPDATA': 'C:\\Users\\User\\AppData\\Local', 'APPDATA': 'C:\\Users\\
+User\\AppData\\Roaming', 'PROCESSOR_IDENTIFIER': 'AMD64 Family 22 Model 48 Stepping 1, AuthenticAMD', 'PATHEXT': '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL', 'PSMODULEPATH': 'C:\
+\Users\\User\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules', 'PROGRAMFILES(X86)': 'C:\\Program Files
+ (x86)', 'PROMPT': '(venv) $P$G', 'OS': 'Windows_NT', 'PROCESSOR_ARCHITECTURE': 'AMD64', 'NUMBER_OF_PROCESSORS': '4', 'COMSPEC': 'C:\\Windows\\system32\\cmd.exe', 'PROCESSOR_LEVEL': '22', '_OLD_V
+IRTUAL_PATH': 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\User
+s\\User\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\;C:\\Users\\User\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Program
+ Files\\JetBrains\\PyCharm Community Edition 2021.3\\bin;;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'WINDIR': 'C:\\Windows', 'USERDOMAIN_ROAMINGPROFILE': 'COM
+P-LENOVO-TAI', 'PYCHARM COMMUNITY EDITION': 'C:\\Program Files\\JetBrains\\PyCharm Community Edition 2021.3\\bin;', 'PROGRAMFILES': 'C:\\Program Files', 'TMP': 'C:\\Users\\User\\AppData\\Local\\T
+emp', 'TEMP': 'C:\\Users\\User\\AppData\\Local\\Temp', 'COMMONPROGRAMFILES(X86)': 'C:\\Program Files (x86)\\Common Files', 'ONEDRIVE': 'C:\\Users\\User\\OneDrive', 'USERDOMAIN': 'COMP-LENOVO-TAI'
+, 'SYSTEMDRIVE': 'C:', 'COMPUTERNAME': 'COMP-LENOVO-TAI', 'PROGRAMDATA': 'C:\\ProgramData', 'FPS_BROWSER_USER_PROFILE_STRING': 'Default', 'COMMONPROGRAMFILES': 'C:\\Program Files\\Common Files',
+'__INTELLIJ_COMMAND_HISTFILE__': 'C:\\Users\\User\\AppData\\Local\\JetBrains\\PyCharmCE2021.3\\terminal\\history\\D16-module-v1-history', 'DJANGO_SETTINGS_MODULE': 'gamesite.settings', 'RUN_MAIN'
+: 'true', 'SERVER_NAME': 'Comp-Lenovo-Taiga', 'GATEWAY_INTERFACE': 'CGI/1.1', 'SERVER_PORT': '8000', 'REMOTE_HOST': '', 'CONTENT_LENGTH': '129', 'SCRIPT_NAME': '', 'SERVER_PROTOCOL': 'HTTP/1.1',
+'SERVER_SOFTWARE': 'WSGIServer/0.2', 'REQUEST_METHOD': 'POST', 'PATH_INFO': '/detail/8/', 'QUERY_STRING': '', 'REMOTE_ADDR': '127.0.0.1', 'CONTENT_TYPE': 'application/x-www-form-urlencoded', 'HTT
+P_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_CACHE_CONTROL': 'max-age=0', 'HTTP_SEC_CH_UA': '" Not A;Brand";v="99", "Chromium";v="96", "Yandex";v="22"', 'HTTP_SEC_CH_UA_MOBIL
+E': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_ORIGIN': 'http://127.0.0.1:8000', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Appl
+eWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.174 YaBrowser/22.1.5.810 Yowser/2.5 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp
+,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'HTTP_SEC_FETCH_SITE': 'same-origin', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'docume
+nt', 'HTTP_REFERER': 'http://127.0.0.1:8000/detail/8/', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br', 'HTTP_ACCEPT_LANGUAGE': 'ru,en;q=0.9', 'HTTP_COOKIE': 'csrftoken=OF16FHkG8f6dqj2QiA6o8MipNsqpO
+k4klvl0kF56FwM9Jq9SMErLA55G5idBcx7I; sessionid=cchtazpf7w8gzbqor0f8x8i4u569a604; ckCsrfToken=9IKsUEfBAhq4NXjYLJz9P0pW38u51PegSDjFwQV2', 'wsgi.input': <django.core.handlers.wsgi.LimitedStream obje
+ct at 0x0000025FCEC73B80>, 'wsgi.errors': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>, 'wsgi.version': (1, 0), 'wsgi.run_once': False, 'wsgi.url_scheme': 'http', 'wsgi.multithre
+ad': True, 'wsgi.multiprocess': False, 'wsgi.file_wrapper': <class 'wsgiref.util.FileWrapper'>, 'CSRF_COOKIE': 'OF16FHkG8f6dqj2QiA6o8MipNsqpOk4klvl0kF56FwM9Jq9SMErLA55G5idBcx7I'}
+path_info : /detail/8/
+path : /detail/8/
+META : {'INTELLIJ IDEA COMMUNITY EDITION': 'C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'TERM_SESSION_ID': '3e023bef-8d75-4772-853f-ae3e6bb5452c', 'COMMONPROGRA
+MW6432': 'C:\\Program Files\\Common Files', 'PROGRAMW6432': 'C:\\Program Files', 'USERNAME': 'User', 'USERPROFILE': 'C:\\Users\\User', 'ALLUSERSPROFILE': 'C:\\ProgramData', 'PROCESSOR_REVISION':
+'3001', 'IDEA_INITIAL_DIRECTORY': 'C:\\Windows\\system32', 'FPS_BROWSER_APP_PROFILE_STRING': 'Internet Explorer', 'PUBLIC': 'C:\\Users\\Public', 'PATH': 'C:\\pythonProject\\D16-module-v1\\venv/Sc
+ripts;C:\\pythonProject\\D16-module-v1\\venv\\Scripts;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH
+\\;C:\\Program Files\\Git\\cmd;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\;C:\\Users\\User\\AppData\\Loc
+al\\Microsoft\\WindowsApps;;C:\\Program Files\\JetBrains\\PyCharm Community Edition 2021.3\\bin;;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'DRIVERDATA': 'C:\\
+Windows\\System32\\Drivers\\DriverData', 'HOMEDRIVE': 'C:', 'SESSIONNAME': 'Console', 'TERMINAL_EMULATOR': 'JetBrains-JediTerm', 'LOGONSERVER': '\\\\COMP-LENOVO-TAI', 'SYSTEMROOT': 'C:\\Windows',
+ 'HOMEPATH': '\\Users\\User', 'VIRTUAL_ENV': 'C:\\pythonProject\\D16-module-v1\\venv', '_OLD_VIRTUAL_PROMPT': '$P$G', 'LOCALAPPDATA': 'C:\\Users\\User\\AppData\\Local', 'APPDATA': 'C:\\Users\\Use
+r\\AppData\\Roaming', 'PROCESSOR_IDENTIFIER': 'AMD64 Family 22 Model 48 Stepping 1, AuthenticAMD', 'PATHEXT': '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL', 'PSMODULEPATH': 'C:\\Us
+ers\\User\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules', 'PROGRAMFILES(X86)': 'C:\\Program Files (x
+86)', 'PROMPT': '(venv) $P$G', 'OS': 'Windows_NT', 'PROCESSOR_ARCHITECTURE': 'AMD64', 'NUMBER_OF_PROCESSORS': '4', 'COMSPEC': 'C:\\Windows\\system32\\cmd.exe', 'PROCESSOR_LEVEL': '22', '_OLD_VIRT
+UAL_PATH': 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Users\\
+User\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\;C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python310\\;C:\\Users\\User\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Program Fi
+les\\JetBrains\\PyCharm Community Edition 2021.3\\bin;;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.3.2\\bin;', 'WINDIR': 'C:\\Windows', 'USERDOMAIN_ROAMINGPROFILE': 'COMP-L
+ENOVO-TAI', 'PYCHARM COMMUNITY EDITION': 'C:\\Program Files\\JetBrains\\PyCharm Community Edition 2021.3\\bin;', 'PROGRAMFILES': 'C:\\Program Files', 'TMP': 'C:\\Users\\User\\AppData\\Local\\Temp
+', 'TEMP': 'C:\\Users\\User\\AppData\\Local\\Temp', 'COMMONPROGRAMFILES(X86)': 'C:\\Program Files (x86)\\Common Files', 'ONEDRIVE': 'C:\\Users\\User\\OneDrive', 'USERDOMAIN': 'COMP-LENOVO-TAI', '
+SYSTEMDRIVE': 'C:', 'COMPUTERNAME': 'COMP-LENOVO-TAI', 'PROGRAMDATA': 'C:\\ProgramData', 'FPS_BROWSER_USER_PROFILE_STRING': 'Default', 'COMMONPROGRAMFILES': 'C:\\Program Files\\Common Files', '__
+INTELLIJ_COMMAND_HISTFILE__': 'C:\\Users\\User\\AppData\\Local\\JetBrains\\PyCharmCE2021.3\\terminal\\history\\D16-module-v1-history', 'DJANGO_SETTINGS_MODULE': 'gamesite.settings', 'RUN_MAIN': '
+true', 'SERVER_NAME': 'Comp-Lenovo-Taiga', 'GATEWAY_INTERFACE': 'CGI/1.1', 'SERVER_PORT': '8000', 'REMOTE_HOST': '', 'CONTENT_LENGTH': '129', 'SCRIPT_NAME': '', 'SERVER_PROTOCOL': 'HTTP/1.1', 'SE
+RVER_SOFTWARE': 'WSGIServer/0.2', 'REQUEST_METHOD': 'POST', 'PATH_INFO': '/detail/8/', 'QUERY_STRING': '', 'REMOTE_ADDR': '127.0.0.1', 'CONTENT_TYPE': 'application/x-www-form-urlencoded', 'HTTP_H
+OST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_CACHE_CONTROL': 'max-age=0', 'HTTP_SEC_CH_UA': '" Not A;Brand";v="99", "Chromium";v="96", "Yandex";v="22"', 'HTTP_SEC_CH_UA_MOBILE':
+ '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_ORIGIN': 'http://127.0.0.1:8000', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWe
+bKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.174 YaBrowser/22.1.5.810 Yowser/2.5 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,im
+age/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'HTTP_SEC_FETCH_SITE': 'same-origin', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document'
+, 'HTTP_REFERER': 'http://127.0.0.1:8000/detail/8/', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br', 'HTTP_ACCEPT_LANGUAGE': 'ru,en;q=0.9', 'HTTP_COOKIE': 'csrftoken=OF16FHkG8f6dqj2QiA6o8MipNsqpOk4k
+lvl0kF56FwM9Jq9SMErLA55G5idBcx7I; sessionid=cchtazpf7w8gzbqor0f8x8i4u569a604; ckCsrfToken=9IKsUEfBAhq4NXjYLJz9P0pW38u51PegSDjFwQV2', 'wsgi.input': <django.core.handlers.wsgi.LimitedStream object
+at 0x0000025FCEC73B80>, 'wsgi.errors': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>, 'wsgi.version': (1, 0), 'wsgi.run_once': False, 'wsgi.url_scheme': 'http', 'wsgi.multithread'
+: True, 'wsgi.multiprocess': False, 'wsgi.file_wrapper': <class 'wsgiref.util.FileWrapper'>, 'CSRF_COOKIE': 'OF16FHkG8f6dqj2QiA6o8MipNsqpOk4klvl0kF56FwM9Jq9SMErLA55G5idBcx7I'}
+method : POST
+content_type : application/x-www-form-urlencoded
+content_params : {}
+_stream : <_io.BytesIO object at 0x0000025FCEA76D40>
+_read_started : True
+resolver_match : ResolverMatch(func=main.views.NoteDetail, args=(), kwargs={'pk': 8}, url_name='detail', app_names=[], namespaces=[], route='detail/<int:pk>/')
+COOKIES : {'csrftoken': 'OF16FHkG8f6dqj2QiA6o8MipNsqpOk4klvl0kF56FwM9Jq9SMErLA55G5idBcx7I', 'sessionid': 'cchtazpf7w8gzbqor0f8x8i4u569a604', 'ckCsrfToken': '9IKsUEfBAhq4NXjYLJz9P0pW38u51PegSDjFwQ
+V2'}
+session : <django.contrib.sessions.backends.db.SessionStore object at 0x0000025FCEC735E0>
+user : admin
+_messages : <FallbackStorage: request=<WSGIRequest: POST '/detail/8/'>>
+_body : b'csrfmiddlewaretoken=YJklXU7HLdeVm8IwtbiiU3uTMFBTsqzsvzEfCSS7iuURFfPyXfDFmmha4vo5QDCQ&content=%D1%84%D1%8B%D0%B2%D1%84%D1%8B%D0%B2'
+_post : <QueryDict: {'csrfmiddlewaretoken': ['YJklXU7HLdeVm8IwtbiiU3uTMFBTsqzsvzEfCSS7iuURFfPyXfDFmmha4vo5QDCQ'], 'content': ['фывфыв']}>
+_files : <MultiValueDict: {}>
+csrf_processing_done : True
+_cached_user : admin

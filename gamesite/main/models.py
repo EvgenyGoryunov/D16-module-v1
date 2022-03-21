@@ -34,7 +34,7 @@ class Note(models.Model):
 
 class Response(models.Model):
     """Модель - отклики"""
-    note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
+    notenote = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователь')
     content = models.TextField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
