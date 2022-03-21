@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 
 from .filter import NoteFilter
 from .forms import NoteForm, ResponseForm, Test
-from .models import Note
+from .models import Note, Response
 
 
 class NoteMain(ListView):
@@ -43,21 +43,34 @@ class NoteDetail(DetailView):
     form = ResponseForm
     # вариант2 добавления переменной в контекст шаблона
     extra_context = {'form': ResponseForm}
+
     # success_url = reverse_lazy('main')
-
-
 
     #
     def post(self, request, *args, **kwargs):
-        error = ''
         form = ResponseForm(request.POST)
         print('111')
         if form.is_valid():
             print('222')
-            # form.instance.user = self.request.user
+
             print('333')
             # id = self.kwargs.get('pk')
-            # print(id)
+            print(id)
+            form.instance.note_id = self.kwargs.get('pk')
+            form.instance.user = self.request.user
+            print('444')
+            form.save()
+            # pk = 13
+            # Response.objects.get(pk=pk).note_id.add(id)
+            # Response.objects.get(pk=pk).note_id.add(request.user)
+
+            print('555')
+
+            # Response.objects.create(note_id=2, user_id='2', content='333content')
+            return redirect('main')
+
+            # error = ''
+            # form.instance.user = self.request.user
             # print(type(id))
             # print(request.__dict__)
             # form.instance.notenote = id
@@ -65,18 +78,11 @@ class NoteDetail(DetailView):
             # form.instance.note = self.kwargs.get('pk')
             # form.instance.note = self.request.note
 
-            print('444')
-            form.save()
-            print('555')
-            return redirect('main')
-
         # else:
         #     error = 'ERROR'
         # form = ResponseForm()
         # data = {'form': form, 'error': error}
         # return render(request, '/', data)
-
-
 
     # def test(self, request):
     #     print('11111')
@@ -88,16 +94,8 @@ class NoteDetail(DetailView):
     #             form.save()
 
 
-
-
-
-
 def test(request):
     form = Test()
-
-
-
-
 
     # error = ''
     # if request.method == 'POST':
@@ -111,14 +109,11 @@ def test(request):
     # data = {'form': form, 'error': error}
     # return render(request, '/', data)
 
-
-
     # def get_object(self, **kwargs):
     #     """Помогает извлечь у объекта нужное значение поля и сам объект"""
     #     id = self.kwargs.get('pk')
     #     print('333333333')
     #     return Note.objects.get(pk=id)
-
 
     # def form_valid(self, ResponseForm):
     #     """Автозаполнение поля user"""
@@ -151,8 +146,6 @@ class NoteSearch(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
         return context
-
-
 
 
 def add_response(request):
