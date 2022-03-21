@@ -88,13 +88,13 @@ class NoteSearch(ListView):
 
 
 class ResponseList(ListView):
-    """Главная страница, вывод в виде списка всех объявлений"""
-    # model = Response
+    """Страница отликов пользователя, вывод в виде списка"""
     template_name = 'user_response.html'
     context_object_name = 'responses'
     ordering = ['-dateCreation']
     paginate_by = 5
 
     def get_queryset(self):
+        """Создает фильтр нужных объектов, здесь - по пользователю"""
         user_id = self.request.user.id
         return Response.objects.filter(user_id=user_id)
