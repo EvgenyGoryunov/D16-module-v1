@@ -20,20 +20,16 @@
 <h6>Форма добавления отклика</h6><br>
 
 
-
-
-<form action ="{% url '' }"  method="POST">
+<form method="POST">
     {% csrf_token %}
     {{ form.content }}
-    <span>{{ error }}</span>
+    {{ form.notenote }}
+    {{ form.user }}
     <input type="submit" value="Оставить отклик">
 </form><br><br>
 
 
 
-
-<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>
-<!--<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>-->
 
 <hr>
 {% endblock content %}

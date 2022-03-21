@@ -40,30 +40,35 @@ class NoteDetail(DetailView):
     """Вывод подробностей объявления"""
     template_name = 'note_detail.html'
     queryset = Note.objects.all()
+    form = ResponseForm
     # вариант2 добавления переменной в контекст шаблона
-    # extra_context = {'form': ResponseForm}
+    extra_context = {'form': ResponseForm}
+    # success_url = reverse_lazy('main')
+
+
+
     #
-    # def post(self, request, *args, **kwargs):
-    #     error = ''
-    #     form = ResponseForm(request.POST)
-    #     print('111')
-    #     if form.is_valid():
-    #         print('222')
-    #         form.instance.user = self.request.user
-    #         print('333')
-    #         id = self.kwargs.get('pk')
-    #         # print(id)
-    #         # print(type(id))
-    #         # print(request.__dict__)
-    #         form.instance.notenote = id
-    #         # form.instance.note = id
-    #         # form.instance.note = self.kwargs.get('pk')
-    #         # form.instance.note = self.request.note
-    #
-    #         print('444')
-    #         form.save()
-    #         print('555')
-    #         return redirect('main')
+    def post(self, request, *args, **kwargs):
+        error = ''
+        form = ResponseForm(request.POST)
+        print('111')
+        if form.is_valid():
+            print('222')
+            # form.instance.user = self.request.user
+            print('333')
+            # id = self.kwargs.get('pk')
+            # print(id)
+            # print(type(id))
+            # print(request.__dict__)
+            # form.instance.notenote = id
+            # form.instance.note = id
+            # form.instance.note = self.kwargs.get('pk')
+            # form.instance.note = self.request.note
+
+            print('444')
+            form.save()
+            print('555')
+            return redirect('main')
 
         # else:
         #     error = 'ERROR'

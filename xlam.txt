@@ -38,3 +38,10 @@ class AuthorForm(ModelForm):
 
             {{ form.note }}
     {{ form.user }}
+
+
+
+<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>
+<!--<button><a href="{% url 'add_response' note.id %}"><u>Оставить отклик</u></a></button><br><br>-->
+
+action ="{% url 'Test' }"
