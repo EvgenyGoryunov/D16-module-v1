@@ -22,7 +22,7 @@ class Note(models.Model):
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
-    response = models.
+    # response = models.
 
     def __str__(self):
         return f'{self.title}'
