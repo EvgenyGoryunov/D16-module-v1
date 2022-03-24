@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     # регистрация пользователей
     'sign',
     # загрузчик медиа
-    # https://github.com/django-ckeditor/django-ckeditor
+    # https://github.com/django-ckeditor/django-ckeditor  -  пакет находится тут
     # https://www.youtube.com/watch?v=Rh7THG1-THU - смотреть настройку здесь
     'ckeditor',
     'ckeditor_uploader',
@@ -99,17 +99,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+# для загрузки фото
 STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# для загрузки css файла
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-
