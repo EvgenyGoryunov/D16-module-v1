@@ -121,13 +121,29 @@ class ResponseList(ListView):
     def get_queryset(self):
         """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
         user_id = self.request.user.id
-        # return Note.objects.filter(user_id=user_id)
-        # return Note.objects.filter(user_id=user_id)
+        qaz = Note.objects.filter(user_id=user_id).values('id')
+        print(qaz)
+        print(type(qaz))
+        # for i in qaz:
+        #     print(type(i))
+        #     x = int(i.values())
+        #     print(i.values())
+        #     print(x)
+
+
+
+        # return Response.objects.filter(note_id=qaz)
+        #
+        #
         return Note.objects.filter(user_id=user_id)
 
+
+
     def get_context_data(self, **kwargs):
+        user_id = self.request.user.id
+        # print(Note.objects.filter(user_id=user_id).values('id'))
         context = super().get_context_data(**kwargs)
-        context['responses'] = Response.objects.all()
+        context['responses'] = Response.objects.filter(user_id=user_id)
         # context['responses'] = Response.objects.all()
         # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
         return context
