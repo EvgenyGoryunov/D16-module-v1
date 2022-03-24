@@ -56,7 +56,6 @@ class NoteDetail(DetailView):
             form.instance.note_id = self.kwargs.get('pk')
             print('333')
             form.instance.user = self.request.user
-
             form.save()
 
             # pk = self.kwargs.get('pk')
@@ -83,14 +82,6 @@ def add_response(request):
     # pk = request.GET.get('pk', )
     # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
     # Category.objects.get(pk=pk).subscribers.add(request.user)
-    # return redirect('/news/')
-    pass
-
-
-def delete_response(request):
-    # pk = request.GET.get('pk', )
-    # print('Пользователь', request.user, 'удален из подписчиков категории:', Category.objects.get(pk=pk))
-    # Category.objects.get(pk=pk).subscribers.remove(request.user)
     # return redirect('/news/')
     pass
 
@@ -130,10 +121,13 @@ class ResponseList(ListView):
     def get_queryset(self):
         """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
         user_id = self.request.user.id
+        # return Note.objects.filter(user_id=user_id)
+        # return Note.objects.filter(user_id=user_id)
         return Note.objects.filter(user_id=user_id)
-        # return Response.objects.filter(user_id=user_id)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['responses'] = Response.objects.all()
+        # context['responses'] = Response.objects.all()
+        # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        return context

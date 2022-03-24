@@ -8,14 +8,25 @@
 
 <br><h3>Отклики на объявления </h3><br><br>
 
+{% for response in responses %}
+отклики<br>
+content: {{ response.content }}<br>
+id: {{ response.id }}<br><br>
+{% endfor %}
+
+<hr>
+<hr>
+
 {% for note in notes %}
+объявления<br>
 {{ note.title }}<br>
 {{ note.id }}<br>
 <!--{{ note.content | safe }}<br>-->
 {{ note.user }}<br>
 
-цикл for для каждого объявления выводит все отклики
-в виде списка с именем пользователя и его контактов
+
+<!--цикл for для каждого объявления выводит все отклики-->
+<!--в виде списка с именем пользователя и его контактов-->
 
 
 <!--{{ response.note_id }}<br>-->
