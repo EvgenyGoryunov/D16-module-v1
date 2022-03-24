@@ -52,28 +52,32 @@ class NoteDetail(DetailView):
         form = ResponseForm(request.POST)
         print('111')
         if form.is_valid():
-            # form.instance.note_id = self.kwargs.get('pk')
-            form.instance.user = self.request.user
             print('222')
-            form.save()
+            form.instance.note_id = self.kwargs.get('pk')
             print('333')
-            pk = self.kwargs.get('pk')
-            print('444', pk)
-            # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
-            qaz = Note.objects.get(pk=pk)
-            qaz1 = Note.objects.get(pk=pk).user_response
-            print(qaz)
-            print(qaz1)
-            """нужно получить id последнего отклика, из формы возможно или как???"""
+            form.instance.user = self.request.user
 
-            Note.objects.get(pk=pk).user_response.add(19)
+            form.save()
+
+            # pk = self.kwargs.get('pk')
+            # print('444', pk)
+            # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
+            # qaz = Note.objects.get(pk=pk)
+            # qaz1 = Note.objects.get(pk=pk).user_response
+            # print(qaz)
+            # print(qaz1)
+            """нужно получить id последнего отклика, из формы возможно или как???"""
+            # print(Response)
+            # print(Response.pk)
+            # print(Response.user)
+            # print(Response.content)
+
+            # Note.objects.get(pk=pk).user_response.add(19)
             # добавить ид данного отклика в бд объявления в графу user_response
             print('555')
 
-
-
-
             return redirect('main')
+
 
 def add_response(request):
     # pk = request.GET.get('pk', )
@@ -128,8 +132,6 @@ class ResponseList(ListView):
         user_id = self.request.user.id
         return Note.objects.filter(user_id=user_id)
         # return Response.objects.filter(user_id=user_id)
-
-
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
