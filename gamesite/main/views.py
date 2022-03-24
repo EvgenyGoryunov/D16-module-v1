@@ -50,15 +50,15 @@ class NoteDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         form = ResponseForm(request.POST)
-        print('111')
+        # print('111')
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user = self.request.user
-            print(self.request.user)
-            print(self.request.user.id)
-            print('222')
+            # print(self.request.user)
+            # print(self.request.user.id)
+            # print('222')
             form.save()
-            print('333')
+            # print('333')
             return redirect('main')
 
 

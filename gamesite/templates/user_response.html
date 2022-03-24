@@ -6,12 +6,14 @@
 
 {% block content %}
 
-<br><h3>Отклики пользователя</h3><br><br>
+<br><h3>Отклики на объявления {{ response.user_id.name }}</h3><br><br>
 
 {% for response in responses %}
 {{ response.content }}<br>
 {{ response.user_id }}<br>
-{{ response.note_id }}<br>
+
+
+<!--{{ response.note_id }}<br>-->
 
 <hr>
 <hr>

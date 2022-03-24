@@ -13,16 +13,29 @@ class Category(models.Model):
         return f'{self.name}'
 
 
+class Response(models.Model):
+    """Модель - отклики
+    поле content содержит текст, например контакты в виде e-mail пользователя"""
+    # note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователь')
+    content = models.TextField(verbose_name='Контент')
+    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return f'{self.user}'
+
+
 class Note(models.Model):
     """Модель - объявления
-    поле контент может содержать текст, фото, видео, документы
-    поле user авто присваивает значение текущего пользователя"""
+    поле content может содержать текст, фото, форматир текст, таблицы
+    поле user авто присваивает значение текущего пользователя
+    поле user_response содержит id_user откликнувшихся на данную статью"""
     title = models.CharField(max_length=128, verbose_name='Название')
     content = RichTextUploadingField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
-    # response = models.
+    user_response = models.ManyToManyField(Response, )
 
     def __str__(self):
         return f'{self.title}'
@@ -31,14 +44,3 @@ class Note(models.Model):
         """Функция перенаправления пользователя после успешного добавления или изменения в бд
         в данном случае - обратиться к url с именем detail, передав pk = id, и далее по списку..."""
         return reverse('detail', kwargs={'pk': self.id})
-
-
-class Response(models.Model):
-    """Модель - отклики"""
-    note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователь')
-    content = models.TextField(verbose_name='Контент')
-    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-
-    def __str__(self):
-        return f'{self.user}'

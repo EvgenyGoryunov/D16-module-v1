@@ -26,5 +26,6 @@ class ResponseForm(ModelForm):
     class Meta:
         model = Response
         fields = ['content']
-        widgets = {'content': EmailInput(attrs={'size': 50, 'placeholder': 'Введите свой e-mail'})}
+        widgets = {'content': TextInput(attrs={'size': 50, 'placeholder': 'Введите свой e-mail'})}
+        # widgets = {'content': EmailInput(attrs={'size': 50, 'placeholder': 'Введите свой e-mail'})}
 
