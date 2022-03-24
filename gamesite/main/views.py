@@ -68,7 +68,7 @@ class NoteEdit(UpdateView):
     form_class = NoteForm
 
     def get_object(self, **kwargs):
-        """Помогает извлечь у объекта нужное значение поля и сам объект"""
+        """Помогает получить объект и вывести его на страницу"""
         id = self.kwargs.get('pk')
         return Note.objects.get(pk=id)
 
@@ -90,11 +90,17 @@ class NoteSearch(ListView):
 class ResponseList(ListView):
     """Страница отликов пользователя, вывод в виде списка"""
     template_name = 'user_response.html'
-    context_object_name = 'responses'
+    context_object_name = 'notes'
     ordering = ['-dateCreation']
     paginate_by = 5
 
     def get_queryset(self):
         """Создает фильтр нужных объектов, здесь - по пользователю"""
         user_id = self.request.user.id
-        return Response.objects.filter(user_id=user_id)
+        return Note.objects.filter(user_id=user_id)
+        # return Response.objects.filter(user_id=user_id)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+    #     return context
