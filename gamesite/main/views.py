@@ -50,16 +50,45 @@ class NoteDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         form = ResponseForm(request.POST)
-        # print('111')
+        print('111')
         if form.is_valid():
-            form.instance.note_id = self.kwargs.get('pk')
+            # form.instance.note_id = self.kwargs.get('pk')
             form.instance.user = self.request.user
-            # print(self.request.user)
-            # print(self.request.user.id)
-            # print('222')
+            print('222')
             form.save()
-            # print('333')
+            print('333')
+            pk = self.kwargs.get('pk')
+            print('444', pk)
+            # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
+            qaz = Note.objects.get(pk=pk)
+            qaz1 = Note.objects.get(pk=pk).user_response
+            print(qaz)
+            print(qaz1)
+            """нужно получить id последнего отклика, из формы возможно или как???"""
+
+            Note.objects.get(pk=pk).user_response.add(19)
+            # добавить ид данного отклика в бд объявления в графу user_response
+            print('555')
+
+
+
+
             return redirect('main')
+
+def add_response(request):
+    # pk = request.GET.get('pk', )
+    # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
+    # Category.objects.get(pk=pk).subscribers.add(request.user)
+    # return redirect('/news/')
+    pass
+
+
+def delete_response(request):
+    # pk = request.GET.get('pk', )
+    # print('Пользователь', request.user, 'удален из подписчиков категории:', Category.objects.get(pk=pk))
+    # Category.objects.get(pk=pk).subscribers.remove(request.user)
+    # return redirect('/news/')
+    pass
 
 
 class NoteEdit(UpdateView):
@@ -95,10 +124,12 @@ class ResponseList(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        """Создает фильтр нужных объектов, здесь - по пользователю"""
+        """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
         user_id = self.request.user.id
         return Note.objects.filter(user_id=user_id)
         # return Response.objects.filter(user_id=user_id)
+
+
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
