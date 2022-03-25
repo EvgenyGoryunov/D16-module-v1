@@ -23,6 +23,7 @@ class Note(models.Model):
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
+
     # user_response = models.ManyToManyField(Response, )
 
     def __str__(self):
@@ -36,9 +37,11 @@ class Note(models.Model):
 
 class Response(models.Model):
     """Модель - отклики
-    поле content содержит текст, например контакты в виде e-mail пользователя"""
+    поле content содержит текст, например контакты в виде e-mail пользователя, либо телефон"""
     note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_объявления')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователь')
+    user_author = models.IntegerField(default=0, verbose_name='id_автора_объявления')
+    # user_author = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_автора_объявления')
+    user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователя_отклика')
     content = models.TextField(verbose_name='Контент')
     dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 

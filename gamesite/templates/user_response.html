@@ -8,14 +8,18 @@
 
 <br><h3>Отклики на объявления </h3><br><br>
 
-<br>
+
 Список объявлений данного пользователя
 <br><br>
 {% for note in notes %}
-{{ note.title }}<br>
-{{ note.id }}<br>
+<!--{{ note.title }}<br>-->
+<!--{{ note.id }}<br>-->
 <!--{{ note.content | safe }}<br>-->
-{{ note.user }}<br><br>
+<!--{{ note.user }}<br><br>-->
+
+
+{{ note.id }}<br><br>
+{{ note.content }}<br><br>
 {% endfor %}
 
 

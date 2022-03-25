@@ -53,9 +53,19 @@ class NoteDetail(DetailView):
         print('111')
         if form.is_valid():
             print('222')
+            print(self.kwargs.get('pk'))
             form.instance.note_id = self.kwargs.get('pk')
             print('333')
-            form.instance.user = self.request.user
+            print(self.kwargs.get('user'))
+            print('id', Note.objects.get(id=self.kwargs.get('pk')).user.id)
+            print(Note.objects.get(id=self.kwargs.get('pk')).user)
+            print('333-1')
+            form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
+            # form.instance.user_author = self.kwargs.get('user')
+            print('444')
+            print(self.request.user)
+            form.instance.user_response = self.request.user
+            print('555')
             form.save()
 
             # pk = self.kwargs.get('pk')
@@ -118,32 +128,28 @@ class ResponseList(ListView):
     ordering = ['-dateCreation']
     paginate_by = 5
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
         user_id = self.request.user.id
-        qaz = Note.objects.filter(user_id=user_id).values('id')
-        print(qaz)
-        print(type(qaz))
-        # for i in qaz:
-        #     print(type(i))
-        #     x = int(i.values())
-        #     print(i.values())
-        #     print(x)
+
+        # qaz = Note.objects.filter(user_id=user_id).values('id')
+        # print(qaz)
+        print(user_id)
 
 
-
-        # return Response.objects.filter(note_id=qaz)
+        return Response.objects.filter(user_author=user_id)
+        # return Response.objects.filter(note_id=12)
         #
         #
-        return Note.objects.filter(user_id=user_id)
+        # return Note.objects.filter(user_id=user_id)
 
 
-
-    def get_context_data(self, **kwargs):
-        user_id = self.request.user.id
-        # print(Note.objects.filter(user_id=user_id).values('id'))
-        context = super().get_context_data(**kwargs)
-        context['responses'] = Response.objects.filter(user_id=user_id)
-        # context['responses'] = Response.objects.all()
-        # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
-        return context
+    #
+    # def get_context_data(self, **kwargs):
+    #     user_id = self.request.user.id
+    #     # print(Note.objects.filter(user_id=user_id).values('id'))
+    #     context = super().get_context_data(**kwargs)
+    #     context['responses'] = Response.objects.filter(user_id=user_id)
+    #     # context['responses'] = Response.objects.all()
+    #     # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+    #     return context
