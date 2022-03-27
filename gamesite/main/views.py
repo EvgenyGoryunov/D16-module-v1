@@ -35,9 +35,6 @@ class NoteDelete(DeleteView):
     # queryset - переопределение вывода инфы на страницу
     queryset = Note.objects.all()
     # success_url - перенаправление на url с name = 'main'
-    # reverse_lazy - ленивая переадресация, то есть выполняется после всего
-    # выполнения всего кода, если просто reverse написать, то мгновенно переведет
-    # не успев нижний код исполнить
     success_url = reverse_lazy('main')
 
 
@@ -93,7 +90,7 @@ class NoteSearch(ListView):
 
 class ResponseList(ListView):
     """Страница отликов пользователя
-    выводит не наши отклики, а отклики на наши объявления, важно!!!"""
+    выводит не наши отклики, а отклики на наши объявления"""
     template_name = 'user_response.html'
     context_object_name = 'responses'
     ordering = ['-datetime']
@@ -123,36 +120,14 @@ class ResponseAccept(View):
 
 
 class ResponseRemove(View):
-    """Отклонение отклика"""
-    model = Response
+    """Отклонение (условное удаление) отклика"""
 
     def get(self, request, *args, **kwargs):
+        """Присваивает полю status значение = 1, то есть True, означает, что отклик
+        отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
         id = self.kwargs.get('pk')
-
-        # Response.objects.get(id=id).update(content='123456789')
-
         qaz = Response.objects.get(id=id)
         qaz.status = 1
         qaz.save()
 
-        # qaz = Response.objects.get(id=id)
-        # qaz.content = '123'
-        # qaz.save()
-
-
-
-
-
-        # Response.objects.get(id=id).delete()
-
-        # Response.objects.get(id=id).update(content='123456789')
-        # Response.objects.get(id=id).content.add('123456789')
-
-
-        # print('status', Response.objects.get(id=id).status)
-        # qaz = Response.objects.get(id=id).status
-        # qaz = True
-        # Response.objects.get(id=id).status = True
-        # print('status', Response.objects.get(id=id).status)
-        print('********************2222*********************')
         return redirect('response')
