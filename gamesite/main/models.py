@@ -42,7 +42,7 @@ class Response(models.Model):
     user_fio = models.CharField(max_length=64, default="ФИО не задано", verbose_name='ФИО_автора_объявления')
     content = models.TextField(verbose_name='Контент отклика')
     datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')
-    status = models.BooleanField(default=False, verbose_name='Отклик отклоне')
+    status = models.BooleanField(default=False, verbose_name='Статус отклика')
 
     def __str__(self):
         return f'{self.user}'

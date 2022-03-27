@@ -124,10 +124,29 @@ class ResponseAccept(View):
 
 class ResponseRemove(View):
     """Отклонение отклика"""
+    model = Response
 
     def get(self, request, *args, **kwargs):
         id = self.kwargs.get('pk')
-        Response.objects.get(id=id).content.add('123456789')
+
+        # Response.objects.get(id=id).update(content='123456789')
+
+        qaz = Response.objects.get(id=id)
+        qaz.status = 1
+        qaz.save()
+
+        # qaz = Response.objects.get(id=id)
+        # qaz.content = '123'
+        # qaz.save()
+
+
+
+
+
+        # Response.objects.get(id=id).delete()
+
+        # Response.objects.get(id=id).update(content='123456789')
+        # Response.objects.get(id=id).content.add('123456789')
 
 
         # print('status', Response.objects.get(id=id).status)
