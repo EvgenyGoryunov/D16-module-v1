@@ -57,6 +57,10 @@ class NoteDetail(DetailView):
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
             form.instance.user_response = self.request.user
+            first_name = self.request.user.first_name
+            last_name = self.request.user.last_name
+            fio = first_name + " " + last_name
+            form.instance.user_fio = fio
             form.save()
 
             return redirect('main')
