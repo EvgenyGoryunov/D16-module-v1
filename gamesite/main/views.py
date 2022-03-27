@@ -1,4 +1,4 @@
-"""************************************************* ПРЕДСТАВЛЕНИЯ  ************************************************"""
+"""************************************************* ПРЕДСТАВЛЕНИЯ ************************************************"""
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -97,10 +97,11 @@ class ResponseList(ListView):
     paginate_by = 5
 
     def get_queryset(self, **kwargs):
-        """Создает фильтр нужных объектов, здесь - по текущему пользователю
-        то есть выводятся объявления только текущего пользователя"""
+        """Создает фильтры нужных объектов, 1 фильтр - по текущему пользователю
+        то есть выводятся объявления только текущего пользователя, 2 фильтр - по статусу
+        ото есть не отклоненные ранее отклики"""
         user_id = self.request.user.id
-        return Response.objects.filter(user_author=user_id)
+        return Response.objects.filter(user_author=user_id).filter(status=False)
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
