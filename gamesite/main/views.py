@@ -49,8 +49,11 @@ class NoteDetail(DetailView):
     extra_context = {'form': ResponseForm}
 
     def post(self, request, *args, **kwargs):
+        """При отправки формы выполнить след код
+        form.instance - для автоматического заполнения полей"""
         form = ResponseForm(request.POST)
         if form.is_valid():
+            print('*****************', self.request.user.last_name)
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
             form.instance.user_response = self.request.user
