@@ -1,6 +1,7 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ  ************************************************"""
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .filter import NoteFilter, ResponseFilter
@@ -109,3 +110,9 @@ class ResponseList(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
         return context
+
+class ResponseRemove(View):
+    pass
+
+class ResponseAccept(View):
+    pass

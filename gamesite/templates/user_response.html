@@ -45,6 +45,10 @@
             <h5>Дата</h5>
         </td>
 
+        <td width="250">
+            <h5>Действия</h5>
+        </td>
+
     </tr>
     {% for response in filter.qs %}
     <tr>
@@ -64,6 +68,15 @@
         <td>
             <p align="center">{{ response.datetime | date:"d M Y" }}</p>
         </td>
+
+        <td>
+            <a href="{% url 'detail' response.id %}"><u>принять</u></a>
+            /
+            <a href="{% url 'detail' response.id %}"><u>удалить</u></a>
+        </td>
+
+
+
 
     </tr>
     {% endfor %}
