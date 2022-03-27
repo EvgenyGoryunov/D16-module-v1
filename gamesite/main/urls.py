@@ -13,6 +13,6 @@ urlpatterns = [
       path('search/', NoteSearch.as_view(), name='search'),
       path('ckeditor', include('ckeditor_uploader.urls')),
       path('response/', ResponseList.as_view(), name='response'),
-      path('response_remove/', ResponseRemove.as_view(), name='remove'),
-      path('response_accept/', ResponseAccept.as_view(), name='accept'),
+      path('response_accept/<int:pk>', ResponseAccept.as_view(), name='accept'),
+      path('response_remove/<int:pk>', ResponseRemove.as_view(), name='remove'),
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

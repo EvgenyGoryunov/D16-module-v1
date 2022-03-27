@@ -111,8 +111,12 @@ class ResponseList(ListView):
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
-class ResponseRemove(View):
-    pass
 
 class ResponseAccept(View):
+    print('ResponseAccept')
+    pass
+
+
+class ResponseRemove(View):
+    print('ResponseRemove')
     pass
