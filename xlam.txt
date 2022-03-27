@@ -1,3 +1,85 @@
+
+        # print(user_id)
+        # qaz = Note.objects.filter(user_id=user_id).values('id')
+        # print(qaz)
+        # return Response.objects.filter(note_id=12)
+        #
+        #
+        # return Note.objects.filter(user_id=user_id)
+    #
+    # def get_context_data(self, **kwargs):
+    #     user_id = self.request.user.id
+    #     # print(Note.objects.filter(user_id=user_id).values('id'))
+    #     context = super().get_context_data(**kwargs)
+    #     context['responses'] = Response.objects.filter(user_id=user_id)
+    #     # context['responses'] = Response.objects.all()
+    #     # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+    #     return context
+
+
+     def post(self, request, *args, **kwargs):
+        form = ResponseForm(request.POST)
+        print('111')
+        if form.is_valid():
+            print('222')
+            print(self.kwargs.get('pk'))
+            form.instance.note_id = self.kwargs.get('pk')
+            print('333')
+            print(self.kwargs.get('user'))
+            print('id', Note.objects.get(id=self.kwargs.get('pk')).user.id)
+            print(Note.objects.get(id=self.kwargs.get('pk')).user)
+            print('333-1')
+            form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
+
+            form.instance.user_response = self.request.user
+            print('555')
+            form.save()
+
+
+            print('555')
+
+            return redirect('main')
+
+            # form.instance.user_author = self.kwargs.get('user')
+            # pk = self.kwargs.get('pk')
+            # print('444', pk)
+            # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
+            # qaz = Note.objects.get(pk=pk)
+            # qaz1 = Note.objects.get(pk=pk).user_response
+            # print(qaz)
+            # print(qaz1)
+            """нужно получить id последнего отклика, из формы возможно или как???"""
+            # print(Response)
+            # print(Response.pk)
+            # print(Response.user)
+            # print(Response.content)
+
+            # Note.objects.get(pk=pk).user_response.add(19)
+            # добавить ид данного отклика в бд объявления в графу user_response
+
+
+            print('444')
+            print(self.request.user)
+<br><h3>Отклики на объявления </h3><br><br>
+
+
+Список объявлений данного пользователя
+<br><br>
+{% for response in responses %}
+<!--{{ note.title }}<br>-->
+<!--{{ note.id }}<br>-->
+<!--{{ note.content | safe }}<br>-->
+<!--{{ note.user }}<br><br>-->
+
+
+{{ response.id }}<br><br>
+{{ response.content }}<br><br>
+{% endfor %}
+
+
+
+
+
 <!--<h3><a href="{% url 'news_detail' post.id %}"><u>{{ post }}</u></a></h3>-->
 
 | truncatechars:250

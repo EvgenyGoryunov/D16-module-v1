@@ -20,7 +20,7 @@ class Note(models.Model):
     поле user_response содержит id_user откликнувшихся на данную статью"""
     title = models.CharField(max_length=128, verbose_name='Название')
     content = RichTextUploadingField(verbose_name='Контент')
-    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
 
@@ -43,7 +43,7 @@ class Response(models.Model):
     # user_author = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='id_автора_объявления')
     user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователя_отклика')
     content = models.TextField(verbose_name='Контент')
-    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
         return f'{self.user}'

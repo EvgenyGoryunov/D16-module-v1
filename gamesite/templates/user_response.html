@@ -6,22 +6,11 @@
 
 {% block content %}
 
-<br><h3>Отклики на объявления </h3><br><br>
-
-
-Список объявлений данного пользователя
-<br><br>
-{% for note in notes %}
-<!--{{ note.title }}<br>-->
-<!--{{ note.id }}<br>-->
-<!--{{ note.content | safe }}<br>-->
-<!--{{ note.user }}<br><br>-->
-
-
-{{ note.id }}<br><br>
-{{ note.content }}<br><br>
-{% endfor %}
-
+<br>
+<form method="GET">
+    {{ filter.form }}
+    <input type="submit" value="Найти">
+</form><br>
 
 <hr>
 <hr>
@@ -29,18 +18,42 @@
 
 {% for response in responses %}
 content: {{ response.content }}<br>
-id: {{ response.id }}<br><br>
+id: {{ response.id }}<br>
+note_id: {{ response.note_id }}<br><br>
 {% endfor %}
 
-<!--цикл for для каждого объявления выводит все отклики-->
-<!--в виде списка с именем пользователя и его контактов-->
-
-
-<!--{{ response.note_id }}<br>-->
 
 <hr>
 <hr>
 
+
+{% for response in filter.qs %}
+<tr>
+
+    <td>
+        <p align="center">{{ response.note }}</p>
+    </td>
+
+    <td>
+        <p align="center">{{ response.user_author }}</p>
+    </td>
+
+    <td>
+        <p align="center">{{ response.user_response }}</p>
+    </td>
+
+    <td>
+        <p align="center">{{ response.content }}</p>
+    </td>
+
+    <td>
+        <p align="center">{{ response.datetime | date:"d M Y" }}</p>
+    </td>
+
+</tr>
+
+
+{% endfor %}
 
 
 <!--код для пагинации-->

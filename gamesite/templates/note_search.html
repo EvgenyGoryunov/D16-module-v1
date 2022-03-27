@@ -5,16 +5,14 @@
 {% block title %} Поиск объявлений {% endblock title %}
 
 {% block content %}
-<br>
-<h3>Поиск объявлений</h3>
-<br>
+
+<br><h3>Поиск объявлений</h3>
 
 
-<form method="GET">
+<br><form method="GET">
     {{ filter.form }}
     <input type="submit" value="Найти">
-</form>
-<br>
+</form><br>
 
 
 <table cellspacing="5" cellpadding="10" border="1"
@@ -53,7 +51,7 @@
 
 
         <td>
-            <p align="center">{{ note.dateCreation | date:"d M Y" }}</p>
+            <p align="center">{{ note.datetime | date:"d M Y" }}</p>
         </td>
 
     </tr>

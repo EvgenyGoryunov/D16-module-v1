@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
-from .filter import NoteFilter
+from .filter import NoteFilter, ResponseFilter
 from .forms import NoteForm, ResponseForm
 from .models import *
 
@@ -13,7 +13,7 @@ class NoteMain(ListView):
     model = Note
     template_name = 'main.html'
     context_object_name = 'notes'
-    ordering = ['-dateCreation']
+    ordering = ['-datetime']
     paginate_by = 5
 
 
@@ -50,50 +50,13 @@ class NoteDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         form = ResponseForm(request.POST)
-        print('111')
         if form.is_valid():
-            print('222')
-            print(self.kwargs.get('pk'))
             form.instance.note_id = self.kwargs.get('pk')
-            print('333')
-            print(self.kwargs.get('user'))
-            print('id', Note.objects.get(id=self.kwargs.get('pk')).user.id)
-            print(Note.objects.get(id=self.kwargs.get('pk')).user)
-            print('333-1')
             form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
-            # form.instance.user_author = self.kwargs.get('user')
-            print('444')
-            print(self.request.user)
             form.instance.user_response = self.request.user
-            print('555')
             form.save()
 
-            # pk = self.kwargs.get('pk')
-            # print('444', pk)
-            # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
-            # qaz = Note.objects.get(pk=pk)
-            # qaz1 = Note.objects.get(pk=pk).user_response
-            # print(qaz)
-            # print(qaz1)
-            """нужно получить id последнего отклика, из формы возможно или как???"""
-            # print(Response)
-            # print(Response.pk)
-            # print(Response.user)
-            # print(Response.content)
-
-            # Note.objects.get(pk=pk).user_response.add(19)
-            # добавить ид данного отклика в бд объявления в графу user_response
-            print('555')
-
             return redirect('main')
-
-
-def add_response(request):
-    # pk = request.GET.get('pk', )
-    # print('Пользователь', request.user, 'добавлен в подписчики категории:', Category.objects.get(pk=pk))
-    # Category.objects.get(pk=pk).subscribers.add(request.user)
-    # return redirect('/news/')
-    pass
 
 
 class NoteEdit(UpdateView):
@@ -112,7 +75,7 @@ class NoteSearch(ListView):
     model = Note
     template_name = 'note_search.html'
     context_object_name = 'note'
-    ordering = ['-dateCreation']
+    ordering = ['-datetime']
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
@@ -122,34 +85,20 @@ class NoteSearch(ListView):
 
 
 class ResponseList(ListView):
-    """Страница отликов пользователя, вывод в виде списка"""
+    """Страница отликов пользователя
+    выводит не наши отклики, а отклики на наши объявления, важно!!!"""
     template_name = 'user_response.html'
-    context_object_name = 'notes'
-    ordering = ['-dateCreation']
+    context_object_name = 'responses'
+    ordering = ['-datetime']
     paginate_by = 5
 
     def get_queryset(self, **kwargs):
         """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
         user_id = self.request.user.id
-
-        # qaz = Note.objects.filter(user_id=user_id).values('id')
-        # print(qaz)
-        print(user_id)
-
-
         return Response.objects.filter(user_author=user_id)
-        # return Response.objects.filter(note_id=12)
-        #
-        #
-        # return Note.objects.filter(user_id=user_id)
 
-
-    #
-    # def get_context_data(self, **kwargs):
-    #     user_id = self.request.user.id
-    #     # print(Note.objects.filter(user_id=user_id).values('id'))
-    #     context = super().get_context_data(**kwargs)
-    #     context['responses'] = Response.objects.filter(user_id=user_id)
-    #     # context['responses'] = Response.objects.all()
-    #     # context['responses'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
-    #     return context
+    def get_context_data(self, **kwargs):
+        """Для добавления новой переменной на страницу (filter)"""
+        context = super().get_context_data(**kwargs)
+        context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
+        return context

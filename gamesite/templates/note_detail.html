@@ -23,8 +23,6 @@
 <form method="POST">
     {% csrf_token %}
     {{ form.content }}
-<!--    {{ form.note }}-->
-<!--    {{ form.user }}-->
     <input type="submit" value="Оставить отклик">
 </form><br><br>
 
@@ -33,10 +31,10 @@
 
 <hr>
 {% endblock content %}
+
+
 <hr>
 {% if is_not_subscribe %}
-<!--GET запрос, который передает в наше представление значение категории, переменная post.category.id, -->
-<!--которая в дальнейшем необходима для добавления подписчиков-->
 <button><a href="add_subscribe/?pk={{ post.category.id }}">Подписка</a></button>
 {% endif %}
 
