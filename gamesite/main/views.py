@@ -54,7 +54,6 @@ class NoteDetail(DetailView):
         form.instance - для автоматического заполнения полей"""
         form = ResponseForm(request.POST)
         if form.is_valid():
-            print('*****************', self.request.user.last_name)
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
             form.instance.user_response = self.request.user
@@ -101,7 +100,8 @@ class ResponseList(ListView):
     paginate_by = 5
 
     def get_queryset(self, **kwargs):
-        """Создает фильтр нужных объектов, здесь - по текущему пользователю"""
+        """Создает фильтр нужных объектов, здесь - по текущему пользователю
+        то есть выводятся объявления только текущего пользователя"""
         user_id = self.request.user.id
         return Response.objects.filter(user_author=user_id)
 
@@ -113,10 +113,19 @@ class ResponseList(ListView):
 
 
 class ResponseAccept(View):
-    print('ResponseAccept')
-    pass
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        print('id', id)
+        print('********************1111*********************')
+        return redirect('response')
 
 
 class ResponseRemove(View):
-    print('ResponseRemove')
-    pass
+    """Удаление"""
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs.get('pk')
+
+        print('********************2222*********************')
+        return redirect('response')

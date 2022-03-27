@@ -24,8 +24,6 @@ class Note(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
 
-    # user_response = models.ManyToManyField(Response, )
-
     def __str__(self):
         return f'{self.title}'
 
@@ -42,12 +40,15 @@ class Response(models.Model):
     user_author = models.IntegerField(default=0, verbose_name='id_автора_объявления')
     user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователя_отклика')
     user_fio = models.CharField(max_length=64, default="ФИО не задано", verbose_name='ФИО_автора_объявления')
-    content = models.TextField(verbose_name='Контент')
-    datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    content = models.TextField(verbose_name='Контент отклика')
+    datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')
+    status = models.BooleanField(default=False, verbose_name='Отклик отклоне')
 
     def __str__(self):
         return f'{self.user}'
 
     # под вопросом!!!
     # def get_absolute_url(self):
-    #     return reverse('response', kwargs={'pk': self.id})
+    #     print('1111111111')
+    #     return reverse('response')
+        # return reverse('response', kwargs={'pk': self.id})
