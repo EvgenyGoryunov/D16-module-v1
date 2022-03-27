@@ -113,6 +113,7 @@ class ResponseList(ListView):
 
 
 class ResponseAccept(View):
+    """Принятие отклика"""
 
     def get(self, request, *args, **kwargs):
         id = self.kwargs.get('pk')
@@ -122,10 +123,17 @@ class ResponseAccept(View):
 
 
 class ResponseRemove(View):
-    """Удаление"""
+    """Отклонение отклика"""
 
     def get(self, request, *args, **kwargs):
         id = self.kwargs.get('pk')
+        Response.objects.get(id=id).content.add('123456789')
 
+
+        # print('status', Response.objects.get(id=id).status)
+        # qaz = Response.objects.get(id=id).status
+        # qaz = True
+        # Response.objects.get(id=id).status = True
+        # print('status', Response.objects.get(id=id).status)
         print('********************2222*********************')
         return redirect('response')
