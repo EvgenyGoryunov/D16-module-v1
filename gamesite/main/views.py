@@ -32,7 +32,7 @@ class NoteCreate(CreateView):
 class NoteDelete(DeleteView):
     """Удаление объявления"""
     template_name = 'note_delete.html'
-    # queryset - переопределение вывода инфы на страницу
+    # queryset - переопределение вывода информации на страницу
     queryset = Note.objects.all()
     # success_url - перенаправление на url с name = 'main'
     success_url = reverse_lazy('main')
@@ -113,7 +113,7 @@ class NoteSearch(ListView):
 
 
 class ResponseList(ListView):
-    """Страница отликов пользователя
+    """Страница откликов пользователя
     выводит не наши отклики, а отклики на наши объявления"""
     template_name = 'user_response.html'
     context_object_name = 'responses'
@@ -121,11 +121,11 @@ class ResponseList(ListView):
     paginate_by = 5
 
     def get_queryset(self, **kwargs):
-        """Создает фильтры нужных объектов, 1 фильтр - по текущему пользователю
-        то есть выводятся объявления только текущего пользователя, 2 фильтр - по статусу
-        то есть еще не отклоненные ранее отклики"""
+        """Создает фильтры для вывода нужных объектов, 1 фильтр - по текущему пользователю
+        то есть выводятся объявления только текущего пользователя, 2,3 фильтры - по статусу
+        то есть еще не отклоненные/не принятые ранее отклики"""
         user_id = self.request.user.id
-        return Response.objects.filter(note__user=user_id).filter(status=False)
+        return Response.objects.filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)
@@ -134,7 +134,10 @@ class ResponseList(ListView):
         context = super().get_context_data(**kwargs)
         user_id = self.request.user.id
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
-        context['del_response'] = Response.objects.filter(note__user=user_id).filter(status=True)
+        context['new_response'] = Response.objects.\
+            filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
+        context['del_response'] = Response.objects.filter(note__user=user_id).filter(status_del=True)
+        context['add_response'] = Response.objects.filter(note__user=user_id).filter(status_add=True)
         return context
 
 
@@ -142,8 +145,12 @@ class ResponseAccept(View):
     """Принятие отклика"""
 
     def get(self, request, *args, **kwargs):
+        """Присваивает полю status_del значение = 1, то есть True, означает, что отклик
+        отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
         pk = self.kwargs.get('pk')
-        print('id', pk)
+        qaz = Response.objects.get(id=pk)
+        qaz.status_add = 1
+        qaz.save()
         print('********************1111*********************')
         return redirect('response')
 
@@ -152,11 +159,11 @@ class ResponseRemove(View):
     """Отклонение (условное удаление) отклика"""
 
     def get(self, request, *args, **kwargs):
-        """Присваивает полю status значение = 1, то есть True, означает, что отклик
+        """Присваивает полю status_del значение = 1, то есть True, означает, что отклик
         отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
         pk = self.kwargs.get('pk')
         qaz = Response.objects.get(id=pk)
-        qaz.status = 1
+        qaz.status_del = 1
         qaz.save()
 
         return redirect('response')

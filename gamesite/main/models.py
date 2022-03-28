@@ -40,7 +40,8 @@ class Response(models.Model):
     user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_автора_отклика')
     content = models.TextField(verbose_name='Контент отклика')
     datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')
-    status = models.BooleanField(default=False, verbose_name='Статус отклика')
+    status_del = models.BooleanField(default=False, verbose_name='Статус отклика - отклонен')
+    status_add = models.BooleanField(default=False, verbose_name='Статус отклика - принят')
 
     def __str__(self):
         return f'{self.user}'

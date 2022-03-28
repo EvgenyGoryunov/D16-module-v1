@@ -7,9 +7,11 @@ class UserRegistration(View):
     def get(self, request):
         return HttpResponse(render(request, 'user_registration.html', ))
 
+
 class UserResponse(View):
     def get(self, request):
         return HttpResponse(render(request, 'user_response.html', ))
+
 
 class UserProfile(View):
     def get(self, request):
