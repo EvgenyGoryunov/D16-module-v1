@@ -12,17 +12,6 @@
     <input type="submit" value="Найти">
 </form><br>
 
-<!--<hr>-->
-<!--<hr>-->
-<!--отклики<br><br>-->
-
-<!--{% for response in responses %}-->
-<!--content: {{ response.content }}<br>-->
-<!--id: {{ response.id }}<br>-->
-<!--note_id: {{ response.note_id }}<br><br>-->
-<!--{% endfor %}-->
-
-
 <hr>
 <hr>
 
@@ -41,8 +30,8 @@
             <h5>Контакты</h5>
         </td>
 
-        <td width="130">
-            <h5>Дата</h5>
+        <td width="150">
+            <h5>Дата отклика</h5>
         </td>
 
         <td width="250">
@@ -58,7 +47,7 @@
         </td>
 
         <td>
-            <p align="center">{{ response.user_response }}</p>
+            <p align="center">{{ response.user_fio }}</p>
         </td>
 
         <td>

@@ -99,9 +99,9 @@ class ResponseList(ListView):
     def get_queryset(self, **kwargs):
         """Создает фильтры нужных объектов, 1 фильтр - по текущему пользователю
         то есть выводятся объявления только текущего пользователя, 2 фильтр - по статусу
-        ото есть не отклоненные ранее отклики"""
+        то есть еще не отклоненные ранее отклики"""
         user_id = self.request.user.id
-        return Response.objects.filter(user_author=user_id).filter(status=False)
+        return Response.objects.filter(user_note=user_id).filter(status=False)
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
