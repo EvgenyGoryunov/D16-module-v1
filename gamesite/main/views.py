@@ -54,23 +54,23 @@ class NoteDetail(DetailView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
         note_author = Note.objects.get(id=pk).user
-        response_note_id = Response.objects.get(id=pk).user
-        print('note_author', note_author)
-        print(self.request.user)
+
+        # если ты автор объявления, то скрыть поле
         if note_author == self.request.user:
             print('1111111111111111111111')
             context['obj'] = False
 
-        elif note_author == self.request.user:
+        # если ты уже сделал отклик - поле скрыть
+        elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
+        # elif not Response.objects.filter(note=pk).exists():
             print('2222222222222222222222')
             context['obj'] = False
 
+        # если ты не автор объявления, и не сделал отклик ранее - поле видимо
         else:
             print('33333333333333333333333')
             context['obj'] = True
-        # return Response.objects.filter(user_note=user_id).filter(status=False)
-        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
-        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+
         return context
 
 

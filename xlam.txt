@@ -1,3 +1,22 @@
+        # Response.objects.filter(note__user=user_id).filter(status=False)
+        # return Response.objects.filter(user_note=user_id).filter(status=False)
+        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+
+        # response_note_id = Response.objects.get(id=pk).user
+        user_id = self.request.user.id
+        print('автор объявления', note_author)
+        print('текущей пользователь', self.request.user)
+
+        # print(Response.objects.filter(note=pk).filter(note__user=user_id).exists())
+        # print(Response.objects.filter(note=pk).exists())
+        # print(Response.objects.filter(note=pk) == self.request.user)
+        # Response.objects.filter(note=pk).exists()
+        print(Response.objects.filter(note=pk).exists())
+        print(Response.objects.filter(user_response=self.request.user).exists())
+        print(Response.objects.filter(user_response=self.request.user).filter(note=pk).exists())
+
+
 
 <!--<hr>-->
 <!--<hr>-->
