@@ -128,13 +128,14 @@ class ResponseList(ListView):
         return Response.objects.filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
 
     def get_context_data(self, **kwargs):
-        """Для добавления новой переменной на страницу (filter)
-        filter - фильтрует отлики по объявлениям
-        del_response - выводит отклоненные отклики (так, для удобства)"""
+        """Для добавления новых переменных на страницу
+        filter - фильтрует отклики по объявлениям (форма выбора на странице)
+        del_response - выводит отклоненные отклики (так, для удобства)
+        add_response - выводит принятые отклики (так, для удобства)"""
         context = super().get_context_data(**kwargs)
         user_id = self.request.user.id
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
-        context['new_response'] = Response.objects.\
+        context['new_response'] = Response.objects. \
             filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
         context['del_response'] = Response.objects.filter(note__user=user_id).filter(status_del=True)
         context['add_response'] = Response.objects.filter(note__user=user_id).filter(status_add=True)
@@ -145,13 +146,13 @@ class ResponseAccept(View):
     """Принятие отклика"""
 
     def get(self, request, *args, **kwargs):
-        """Присваивает полю status_del значение = 1, то есть True, означает, что отклик
-        отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
+        """Присваивает полю status_add значение = 1, то есть True, означает, что отклик
+        принят, то есть он остается в бд, но больше не отображается в общем списке"""
         pk = self.kwargs.get('pk')
         qaz = Response.objects.get(id=pk)
         qaz.status_add = 1
+        qaz.status_del = 0
         qaz.save()
-        print('********************1111*********************')
         return redirect('response')
 
 
@@ -164,6 +165,7 @@ class ResponseRemove(View):
         pk = self.kwargs.get('pk')
         qaz = Response.objects.get(id=pk)
         qaz.status_del = 1
+        qaz.status_add = 0
         qaz.save()
 
         return redirect('response')
