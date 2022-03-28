@@ -6,7 +6,7 @@
 
 {% block content %}<br>
 
-<h3>Подробности объявления</h3><br><br>
+<h3>Подробности объявления</h3><br>
 
 -= {{ note.title }} =-<br>
 <hr>
@@ -14,30 +14,28 @@
 
 - объявление №{{ note.pk }}; автор: {{ note.user }}; категория: {{ note.category }}; дата создания: {{ note.dateCreation }} -<br><br>
 
+
+{% if edit_delete %}
 <a href="{% url 'edit' note.id %}"><u>Редактировать</u></a>
 <a href="{% url 'delete' note.id %}"><u>Удалить</u></a><br><br><br>
+{% endif %}
 
-<h6>Форма добавления отклика</h6><br>
+
+{% if message_response %}
+<h6>Ваш отклик отправлен успешно</h6><br>
+{% endif %}
 
 
+{% if pole_response %}
+<h6>Введите ваши контакты</h6><br>
 <form method="POST">
     {% csrf_token %}
     {{ form.content }}
     <input type="submit" value="Оставить отклик">
 </form><br><br>
-
+{% endif %}
 
 
 
 <hr>
 {% endblock content %}
-
-
-<hr>
-{% if is_not_subscribe %}
-<button><a href="add_subscribe/?pk={{ post.category.id }}">Подписка</a></button>
-{% endif %}
-
-{% if is_subscribe %}
-<button><a href="del_subscribe/?pk={{ post.category.id }}">Отписка</a></button>
-{% endif %}

@@ -58,21 +58,25 @@ class NoteDetail(DetailView):
         # если ты автор объявления, то скрыть поле
         if note_author == self.request.user:
             print('1111111111111111111111')
-            context['obj'] = False
+            context['pole_response'] = False
+            context['message_response'] = False
+            context['edit_delete'] = True
 
         # если ты уже сделал отклик - поле скрыть
         elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
-        # elif not Response.objects.filter(note=pk).exists():
             print('2222222222222222222222')
-            context['obj'] = False
+            context['pole_response'] = False
+            context['message_response'] = True
+            context['edit_delete'] = False
 
         # если ты не автор объявления, и не сделал отклик ранее - поле видимо
         else:
             print('33333333333333333333333')
-            context['obj'] = True
+            context['pole_response'] = True
+            context['message_response'] = False
+            context['edit_delete'] = False
 
         return context
-
 
     def post(self, request, *args, **kwargs):
         """При отправки формы выполнить след код
@@ -87,7 +91,10 @@ class NoteDetail(DetailView):
             form.instance.user_fio = fio
             form.save()
 
-            return redirect('main')
+            # волшебная ссылка перехода на ту же самую страницу после
+            # выполнения POST-запроса, хвала stackoverflow.com
+            return redirect(request.META.get('HTTP_REFERER'))
+
 
 
 class NoteEdit(UpdateView):
@@ -129,7 +136,6 @@ class ResponseList(ListView):
         то есть еще не отклоненные ранее отклики"""
         user_id = self.request.user.id
         return Response.objects.filter(note__user=user_id).filter(status=False)
-
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
