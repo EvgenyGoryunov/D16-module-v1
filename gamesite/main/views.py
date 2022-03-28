@@ -46,13 +46,40 @@ class NoteDetail(DetailView):
     # вариант2 добавления переменной в контекст шаблона
     extra_context = {'form': ResponseForm}
 
+    def get_context_data(self, **kwargs):
+        """Функция для видимости поля откликов, поле не видимо если
+        1) я - автор объявления (самому себе отклик отправлять не нужно)
+        2) уже отправил отклик на объявление ранее (два раза нельзя отправлять отклик на одно
+        и тоже объявление, от спама и прочего)"""
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        note_author = Note.objects.get(id=pk).user
+        response_note_id = Response.objects.get(id=pk).user
+        print('note_author', note_author)
+        print(self.request.user)
+        if note_author == self.request.user:
+            print('1111111111111111111111')
+            context['obj'] = False
+
+        elif note_author == self.request.user:
+            print('2222222222222222222222')
+            context['obj'] = False
+
+        else:
+            print('33333333333333333333333')
+            context['obj'] = True
+        # return Response.objects.filter(user_note=user_id).filter(status=False)
+        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
     def post(self, request, *args, **kwargs):
         """При отправки формы выполнить след код
         form.instance - для автоматического заполнения полей"""
         form = ResponseForm(request.POST)
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
-            form.instance.user_author = Note.objects.get(id=self.kwargs.get('pk')).user.id
             form.instance.user_response = self.request.user
             first_name = self.request.user.first_name
             last_name = self.request.user.last_name
@@ -70,8 +97,8 @@ class NoteEdit(UpdateView):
 
     def get_object(self, **kwargs):
         """Помогает получить объект и вывести его на страницу"""
-        id = self.kwargs.get('pk')
-        return Note.objects.get(pk=id)
+        pk = self.kwargs.get('pk')
+        return Note.objects.get(pk=pk)
 
 
 class NoteSearch(ListView):
@@ -101,14 +128,8 @@ class ResponseList(ListView):
         то есть выводятся объявления только текущего пользователя, 2 фильтр - по статусу
         то есть еще не отклоненные ранее отклики"""
         user_id = self.request.user.id
-        print(user_id)
-        print('11111111111111')
-        # print(Response.objects.get(note__id=8).title[:1])
-        # print(Response.objects.filter(note_id__user_id=user_id).filter(status=False))
-        print('**********************************************')
-        return Response.objects.filter(note__user=user_id)
-        # return Response.objects.filter(note__id=user_id)
-        # return Response.objects.filter(user_note=user_id).filter(status=False)
+        return Response.objects.filter(note__user=user_id).filter(status=False)
+
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
@@ -121,8 +142,8 @@ class ResponseAccept(View):
     """Принятие отклика"""
 
     def get(self, request, *args, **kwargs):
-        id = self.kwargs.get('pk')
-        print('id', id)
+        pk = self.kwargs.get('pk')
+        print('id', pk)
         print('********************1111*********************')
         return redirect('response')
 
@@ -133,8 +154,8 @@ class ResponseRemove(View):
     def get(self, request, *args, **kwargs):
         """Присваивает полю status значение = 1, то есть True, означает, что отклик
         отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
-        id = self.kwargs.get('pk')
-        qaz = Response.objects.get(id=id)
+        pk = self.kwargs.get('pk')
+        qaz = Response.objects.get(id=pk)
         qaz.status = 1
         qaz.save()
 
