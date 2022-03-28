@@ -9,7 +9,7 @@
 <h3>Подробности объявления</h3><br>
 
 -= {{ note.title }} =-<br>
-- автор: {{ note.user }}; категория: {{ note.category }}; дата создания: {{ note.datetime }} -
+- автор: {{ note.user }}({{ note.user.first_name }} {{ note.user.last_name }}); категория: {{ note.category }}; дата создания: {{ note.datetime }} -
 <br><hr>
 
 {{ note.content | safe }}<br><br>

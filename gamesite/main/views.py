@@ -128,9 +128,13 @@ class ResponseList(ListView):
         return Response.objects.filter(note__user=user_id).filter(status=False)
 
     def get_context_data(self, **kwargs):
-        """Для добавления новой переменной на страницу (filter)"""
+        """Для добавления новой переменной на страницу (filter)
+        filter - фильтрует отлики по объявлениям
+        del_response - выводит отклоненные отклики (так, для удобства)"""
         context = super().get_context_data(**kwargs)
+        user_id = self.request.user.id
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
+        context['del_response'] = Response.objects.filter(note__user=user_id).filter(status=True)
         return context
 
 
