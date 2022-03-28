@@ -80,11 +80,6 @@ class NoteDetail(DetailView):
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_response = self.request.user
-            first_name = self.request.user.first_name
-            last_name = self.request.user.last_name
-            # формируем ФИО пользователя
-            fio = first_name + " " + last_name
-            form.instance.user_fio = fio
             form.save()
 
             # волшебная ссылка перехода на ту же самую страницу после
