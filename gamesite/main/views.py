@@ -55,23 +55,18 @@ class NoteDetail(DetailView):
         pk = self.kwargs.get('pk')
         note_author = Note.objects.get(id=pk).user
 
-        # если ты автор объявления, то скрыть поле
+        # если ты автор объявления, то скрыть поле отклика
         if note_author == self.request.user:
-            print('1111111111111111111111')
             context['pole_response'] = False
             context['message_response'] = False
             context['edit_delete'] = True
-
         # если ты уже сделал отклик - поле скрыть
         elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
-            print('2222222222222222222222')
             context['pole_response'] = False
             context['message_response'] = True
             context['edit_delete'] = False
-
-        # если ты не автор объявления, и не сделал отклик ранее - поле видимо
+        # если ты не автор объявления, и не сделал отклик - поле видимо
         else:
-            print('33333333333333333333333')
             context['pole_response'] = True
             context['message_response'] = False
             context['edit_delete'] = False
@@ -79,14 +74,15 @@ class NoteDetail(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        """При отправки формы выполнить след код
-        form.instance - для автоматического заполнения полей"""
+        """При отправки формы выполнить следующий код
+        form.instance - для автоматического заполнения полей формы"""
         form = ResponseForm(request.POST)
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_response = self.request.user
             first_name = self.request.user.first_name
             last_name = self.request.user.last_name
+            # формируем ФИО пользователя
             fio = first_name + " " + last_name
             form.instance.user_fio = fio
             form.save()
@@ -94,7 +90,6 @@ class NoteDetail(DetailView):
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
-
 
 
 class NoteEdit(UpdateView):
