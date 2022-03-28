@@ -38,7 +38,7 @@ class Response(models.Model):
     поле content содержит текст, например контакты в виде e-mail пользователя, либо телефон"""
     note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='Объявление')
     user_note = models.IntegerField(default=0, verbose_name='id_автора_объявления')
-    user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_пользователя_отклика')
+    user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_автора_отклика')
     user_fio = models.CharField(max_length=64, default="ФИО не задано", verbose_name='ФИО_автора_объявления')
     content = models.TextField(verbose_name='Контент отклика')
     datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')

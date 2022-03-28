@@ -101,7 +101,14 @@ class ResponseList(ListView):
         то есть выводятся объявления только текущего пользователя, 2 фильтр - по статусу
         то есть еще не отклоненные ранее отклики"""
         user_id = self.request.user.id
-        return Response.objects.filter(user_note=user_id).filter(status=False)
+        print(user_id)
+        print('11111111111111')
+        # print(Response.objects.get(note__id=8).title[:1])
+        # print(Response.objects.filter(note_id__user_id=user_id).filter(status=False))
+        print('**********************************************')
+        return Response.objects.filter(note__user=user_id)
+        # return Response.objects.filter(note__id=user_id)
+        # return Response.objects.filter(user_note=user_id).filter(status=False)
 
     def get_context_data(self, **kwargs):
         """Для добавления новой переменной на страницу (filter)"""
