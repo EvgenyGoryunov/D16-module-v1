@@ -1,22 +1,41 @@
+from django.forms import TextInput
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm, TextInput, EmailInput
 
 
 
 class UserForm(forms.ModelForm):
-
+    """Форма изменения данных пользователя"""
     class Meta:
-        """__all__ - значит вывести все поля, exclude - исключает указанное поле
-        widgets/size - переопределение размера вывода поля на странице
-        widgets/placeholder - текст в пустом поле"""
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+        # fields = ("username",
+        #           "first_name",
+        #           "last_name",
+        #           "email",
+        #           "password1",
+        #           "password2",)
         widgets = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин'}),
                    'first_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите имя'}),
                    'last_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите фамилию'}),
                    'email': TextInput(attrs={'size': 50, 'placeholder': 'Введите почту'})}
 
+
+class BaseRegisterForm(UserCreationForm):
+    """Форма регистрации нового пользователя"""
+    email = forms.EmailField(label="Email")
+    first_name = forms.CharField(label="Имя")
+    last_name = forms.CharField(label="Фамилия")
+
+    class Meta:
+        model = User
+        fields = ("username",
+                  "first_name",
+                  "last_name",
+                  "email",
+                  "password1",
+                  "password2",)
 
 
 

@@ -7,8 +7,11 @@ SECRET_KEY = 'django-insecure-oge&b4%22%p2$=1_t8a_%18370p&9)c26or3yw&e*6mc6$^g=4
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+# для регистрации пользователей
+ALLOWED_HOSTS = ['127.0.0.1']
 
+# загрузчик медиа
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 INSTALLED_APPS = [
@@ -22,9 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    # основное приложение
     'main',
+
     # регистрация пользователей
     'sign',
+
     # загрузчик медиа
     # https://github.com/django-ckeditor/django-ckeditor  -  пакет находится тут
     # https://www.youtube.com/watch?v=Rh7THG1-THU - смотреть настройку здесь
@@ -54,7 +60,8 @@ ROOT_URLCONF = 'gamesite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR/'templates'],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,7 +108,6 @@ USE_TZ = True
 
 # для загрузки фото
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -111,3 +117,9 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# для регистрации пользователей
+# адрес, где находится шаблон аутентификации
+LOGIN_URL = 'sign/login/'
+# перенаправление пользователя после успешного входа на сайт
+LOGIN_REDIRECT_URL = '/'
