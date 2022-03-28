@@ -15,11 +15,9 @@
 <hr>
 <hr>
 
-
 {% if not new_response %}
 <br><h3>Новых откликов нет</h3><br>
 {% endif %}
-
 
 {% if new_response %}
 <br><h3>Новые отклики</h3><br>
@@ -33,7 +31,6 @@
         <td width="150"><h5>Дата отклика</h5></td>
         <td width="250"><h5>Действия</h5></td>
     </tr>
-
     {% for response in filter.qs %}
     <tr>
         <td><p align="center">{{ response.note }}</p></td>
@@ -47,10 +44,8 @@
 </table><br>
 {% endif %}
 
-
 {% if add_response %}
 <br><h3>Принятые отклики</h3><br>
-
 <table cellspacing="5" cellpadding="10" border="1"
        style=" border-spacing : 10px; border-color : blue; border-style: solid;" bgcolor="FFFFFF">
     <tr>
@@ -60,7 +55,6 @@
         <td width="150"><h5>Дата отклика</h5></td>
         <td width="250"><h5>Статус</h5></td>
     </tr>
-
     {% for response in add_response %}
     <tr>
         <td><p align="center">{{ response.note }}</p></td>
@@ -75,10 +69,8 @@
 
 {% if del_response %}
 <br><h3>Отклоненные отклики</h3><br>
-
 <table cellspacing="5" cellpadding="10" border="1"
        style=" border-spacing : 10px; border-color : blue; border-style: solid;" bgcolor="FFFFFF">
-
     <tr>
         <td width="300"><h5>Объявление</h5></td>
         <td width="100"><h5>Пользователь</h5></td>
@@ -86,7 +78,6 @@
         <td width="150"><h5>Дата отклика</h5></td>
         <td width="250"><h5>Статус</h5></td>
     </tr>
-
     {% for response in del_response %}
     <tr>
         <td><p align="center">{{ response.note }}</p></td>
@@ -96,7 +87,6 @@
         <td><p align="center">отклонен</p></td>
     </tr>
     {% endfor %}
-
 </table><br>
 {% endif %}
 
