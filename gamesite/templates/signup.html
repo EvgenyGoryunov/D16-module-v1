@@ -1,8 +1,25 @@
-{% block content %}
-<h2> Войти в систему </h2>
-<form method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Продолжить">
+{% block content %}<br>
+
+<h2><p align="center"> Регистрация нового пользователя </p></h2>
+
+<form method="post" align="center">
+    {% csrf_token %}
+    <h4>Логин</h4>
+    {{ form.username }}
+    <h4>Имя</h4>
+    {{ form.first_name }}
+    <h4>Фамилия</h4>
+    {{ form.last_name }}
+    <h4>Почта</h4>
+    {{ form.email }}
+    <h4>Пароль</h4>
+    {{ form.password1 }}
+    <h4>Пароль еще раз</h4>
+    {{ form.password2 }}<br><br>
+    <input type="submit" value="Продолжить">
 </form>
 {% endblock %}
+
+
+<!--{{ form.as_p }}-->
+

@@ -37,6 +37,10 @@ class BaseRegisterForm(UserCreationForm):
                   "password1",
                   "password2",)
 
+        # widgets = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин'}),
+        #            'first_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите имя'}),
+        #            'last_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите фамилию'}),
+        #            'email': TextInput(attrs={'size': 50, 'placeholder': 'Введите почту'})}
 
 
 # class UserForm(ModelForm):
