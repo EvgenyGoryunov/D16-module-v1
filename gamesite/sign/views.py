@@ -1,18 +1,17 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views import View
+from django.contrib.auth.models import User
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
+
+from .forms import UserForm
 
 
-class UserRegistration(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'user_registration.html', ))
+class UserProfile(UpdateView):
+    """Редактирование профиля пользователя"""
+    template_name = 'user_profile.html'
+    form_class = UserForm
+    success_url = reverse_lazy('main')
 
-
-class UserResponse(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'user_response.html', ))
-
-
-class UserProfile(View):
-    def get(self, request):
-        return HttpResponse(render(request, 'user_profile.html', ))
+    def get_object(self, **kwargs):
+        """Помогает получить объект и вывести его на страницу"""
+        user = self.request.user
+        return User.objects.get(username=user)

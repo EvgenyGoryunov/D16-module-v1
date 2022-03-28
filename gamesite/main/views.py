@@ -92,6 +92,7 @@ class NoteEdit(UpdateView):
     template_name = 'note_edit.html'
     form_class = NoteForm
 
+
     def get_object(self, **kwargs):
         """Помогает получить объект и вывести его на страницу"""
         pk = self.kwargs.get('pk')

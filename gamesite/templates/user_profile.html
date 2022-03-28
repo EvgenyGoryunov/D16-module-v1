@@ -4,4 +4,19 @@
 
 {% block title %} Профиль пользователя {% endblock title %}
 
-{% block content %} Профиль пользователя {% endblock content %}
+{% block content %}
+
+<br><h3>Редактировать данные профиля</h3><br><br>
+
+<form align="center" method="POST">
+    {% csrf_token %}
+    {{ form.username }}<br><br>
+    {{ form.first_name }}<br><br>
+    {{ form.last_name }}<br><br>
+    {{ form.email }}<br><br>
+    <input type="submit" value="Сохранить изменения">
+</form><br><br>
+
+
+
+{% endblock content %}
