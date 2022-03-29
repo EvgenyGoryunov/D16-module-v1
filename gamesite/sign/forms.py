@@ -1,25 +1,28 @@
-from django.forms import TextInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import TextInput, PasswordInput
 
 
-
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
+    # class UserForm(forms.ModelForm):
     """Форма изменения данных пользователя"""
+
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
-        # fields = ("username",
-        #           "first_name",
-        #           "last_name",
-        #           "email",
-        #           "password1",
-        #           "password2",)
-        widgets = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин'}),
+        # fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ("username",
+                  "first_name",
+                  "last_name",
+                  "email",
+                  "password1",
+                  "password2",)
+        widgets = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин', 'title': 'Your name'}),
                    'first_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите имя'}),
                    'last_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите фамилию'}),
-                   'email': TextInput(attrs={'size': 50, 'placeholder': 'Введите почту'})}
+                   'email': TextInput(attrs={'size': 50, 'placeholder': 'Введите почту'}),
+                   'password1': PasswordInput(attrs={'size': 50, 'placeholder': 'Введите пароль'}),
+                   'password2': PasswordInput(attrs={'size': 50, 'placeholder': 'Введите почту'})}
 
 
 class BaseRegisterForm(UserCreationForm):
@@ -37,21 +40,20 @@ class BaseRegisterForm(UserCreationForm):
                   "password1",
                   "password2",)
 
-        # widgets = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин'}),
+        # Password = {'username': TextInput(attrs={'size': 50, 'placeholder': 'Введите логин'}),
         #            'first_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите имя'}),
         #            'last_name': TextInput(attrs={'size': 50, 'placeholder': 'Введите фамилию'}),
         #            'email': TextInput(attrs={'size': 50, 'placeholder': 'Введите почту'})}
 
-
 # class UserForm(ModelForm):
-    # """Форма для создания/редактирования нового объявления"""
+# """Форма для создания/редактирования нового объявления"""
 
-    # def __init__(self, *args, **kwargs):
-    #     """Задает название пустого (еще не выбранного) поля"""
-    #     super().__init__(*args, **kwargs)
-        # self.fields['category'].empty_label = 'Выберите категорию'
+# def __init__(self, *args, **kwargs):
+#     """Задает название пустого (еще не выбранного) поля"""
+#     super().__init__(*args, **kwargs)
+# self.fields['category'].empty_label = 'Выберите категорию'
 
 
-        # exclude = ['user']
-        # задает форматирование полей
-        # widgets = {'title': TextInput(attrs={'size': 98, 'placeholder': 'Название объявления'})}
+# exclude = ['user']
+# задает форматирование полей
+# widgets = {'title': TextInput(attrs={'size': 98, 'placeholder': 'Название объявления'})}

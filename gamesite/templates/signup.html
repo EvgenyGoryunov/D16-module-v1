@@ -1,6 +1,6 @@
 {% block content %}<br>
 
-<h2><p align="center"> Регистрация нового пользователя </p></h2>
+<h2><p align="center">Регистрация нового пользователя</p></h2>
 
 <form method="post" align="center">
     {% csrf_token %}
@@ -18,8 +18,5 @@
     {{ form.password2 }}<br><br>
     <input type="submit" value="Продолжить">
 </form>
+
 {% endblock %}
-
-
-<!--{{ form.as_p }}-->
-
