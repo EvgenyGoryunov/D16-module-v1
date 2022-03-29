@@ -9,7 +9,7 @@ DEBUG = True
 # для регистрации пользователей
 ALLOWED_HOSTS = ['127.0.0.1']
 
-# загрузчик медиа
+# папка для загрузки медиа
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 INSTALLED_APPS = [
@@ -102,6 +102,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 # для загрузки фото
 STATIC_URL = '/static/'

@@ -1,3 +1,17 @@
+<!--    <h4>Логин</h4>-->
+<!--    {{ form.username }}-->
+<!--    <h4>Имя</h4>-->
+<!--    {{ form.first_name }}-->
+<!--    <h4>Фамилия</h4>-->
+<!--    {{ form.last_name }}-->
+<!--    <h4>Почта</h4>-->
+<!--    {{ form.email }}-->
+<!--    <h4>Пароль</h4>-->
+<!--    {{ form.password1 }}-->
+<!--    <h4>Пароль еще раз</h4>-->
+<!--    {{ form.password2 }}<br><br>-->
+
+
         # Response.objects.filter(note__user=user_id).filter(status=False)
         # return Response.objects.filter(user_note=user_id).filter(status=False)
         # context['obj'] = NoteFilter(self.request.GET, queryset=self.get_queryset())

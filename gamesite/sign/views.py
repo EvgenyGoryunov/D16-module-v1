@@ -10,7 +10,9 @@ class BaseRegisterView(CreateView):
     model = User
     template_name = 'signup.html'
     form_class = BaseRegisterForm
-    success_url = '/'
+    success_url = reverse_lazy('login')
+    # success_url = 'login'
+    # success_url = '/'
 
 
 class UserProfile(UpdateView):
@@ -20,6 +22,7 @@ class UserProfile(UpdateView):
     success_url = reverse_lazy('main')
 
     def get_object(self, **kwargs):
-        """Помогает получить объект и вывести его на страницу"""
+        """Помогает получить объект и вывести его на страницу
+        обязательный метод для представления UpdateView"""
         user = self.request.user
         return User.objects.get(username=user)

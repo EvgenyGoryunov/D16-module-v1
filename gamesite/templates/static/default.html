@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +31,15 @@
             <ul class="navbar-nav ml-auto">
 
                 <!-- кнопки - ссылки на страницы -->
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Создать</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Поиск</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'response' %}">Отклики</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>
-                <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin">АдминПанель
-                    ({{request.user.username}})</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/admin">АдминПанель ({{request.user.username}})</a>
+                </li>
 
             </ul>
         </div>
@@ -44,9 +49,12 @@
 <!-- контент страницы -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">{% block content %} {{ flatpage.content }} {% endblock content %}</div>
+        <div class="col-lg-12 text-center">
+            {% block content %} {{ flatpage.content }} {% endblock content %}
+        </div>
     </div>
 </div>
 
 </body>
+
 </html>
