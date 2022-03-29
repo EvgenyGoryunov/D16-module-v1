@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,7 +6,6 @@ SECRET_KEY = 'django-insecure-oge&b4%22%p2$=1_t8a_%18370p&9)c26or3yw&e*6mc6$^g=4
 
 DEBUG = True
 
-# ALLOWED_HOSTS = []
 # для регистрации пользователей
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -61,7 +59,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR/'templates'],
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
