@@ -21,33 +21,41 @@
 <!-- верхняя панель -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
+        <table>
+            <tr>
+                <td width="800">
+                    <!-- название сайта -->
+                    <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>
+                    <!--                                        <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>-->
 
-        <!-- название сайта -->
-        <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-
-                <!-- кнопки - ссылки на страницы -->
-
-                <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Создать</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Поиск</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'response' %}">Отклики</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>
-                <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin">Админка
-                    {% if request.user.username %} ({{request.user.username}}) {% endif %}</a></li>
-                {% if not request.user.username %}
-                <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/accounts/login/">Войти</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>-->
-                {% endif %}
-                {% if request.user.username %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
-                {% endif %}
-
-            </ul>
-        </div>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- кнопки - ссылки на страницы -->
+                            <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Создать</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Поиск</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'response' %}">Отклики</a></li>
+                            <!--                            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>-->
+                            <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin">Админка
+                                {% if request.user.username %} ({{request.user.username}}) {% endif %}</a></li>
+                            {% if not request.user.username %}
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="http://127.0.0.1:8000/accounts/login/">Войти</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>-->
+                            {% endif %}
+                            {% if request.user.username %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </td>
+                <td width="400" align="right" class="nav-item"><a class="nav-link" href="{% url 'profile' %}">
+                    {{request.user.username}}</a>
+                </td>
+            </tr>
+        </table>
     </div>
 </nav>
+
 
 <!-- контент страницы -->
 <div class="container">
@@ -61,3 +69,11 @@
 </body>
 
 </html>
+
+
+<table>
+    <tr>
+        <td width="1000"></td>
+        <td width="100"></td>
+    </tr>
+</table>
