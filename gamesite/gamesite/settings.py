@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
 ]
 
+DEFAULT_FROM_EMAIL = 'factoryskill@yandex.ru'
+
 # добавили для проекта
 SITE_ID = 1
 
@@ -131,8 +133,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # для регистрации пользователей
 # адрес, где находится шаблон аутентификации
+# после подтверждения по почте перейдем сюда
 # LOGIN_URL = 'sign/login/'
-LOGIN_URL = 'accounts/login/'
+LOGIN_URL = '/accounts/login/'
 # перенаправление пользователя после успешного входа на сайт
 LOGIN_REDIRECT_URL = '/'
 
@@ -141,4 +144,14 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Модуль 6.3 - подтверждение регистрации через почту
+ACCOUNT_AUTHENTIFICTION_METHOD = 'email'
+
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'factoryskill'
+EMAIL_HOST_PASSWORD = 'qazwsx963852'  # пароль от почты
+EMAIL_USE_SSL = True
