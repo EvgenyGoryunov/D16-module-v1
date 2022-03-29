@@ -11,8 +11,6 @@ class BaseRegisterView(CreateView):
     template_name = 'signup.html'
     form_class = BaseRegisterForm
     success_url = reverse_lazy('login')
-    # success_url = 'login'
-    # success_url = '/'
 
 
 class UserProfile(UpdateView):

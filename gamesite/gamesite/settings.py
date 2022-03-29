@@ -23,6 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    # для регистрации пользователя через почту
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     # основное приложение
     'main',
 
@@ -34,6 +40,7 @@ INSTALLED_APPS = [
     # https://www.youtube.com/watch?v=Rh7THG1-THU - смотреть настройку здесь
     'ckeditor',
     'ckeditor_uploader',
+
 ]
 
 # добавили для проекта
@@ -58,7 +65,7 @@ ROOT_URLCONF = 'gamesite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +76,13 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+# для аутентификации пользователя через почту
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # метод аутентификации через почту
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'gamesite.wsgi.application'
@@ -103,13 +117,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # для загрузки фото
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# для загрузки css файла
+# для загрузки css файлов
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -118,6 +131,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # для регистрации пользователей
 # адрес, где находится шаблон аутентификации
-LOGIN_URL = 'sign/login/'
+# LOGIN_URL = 'sign/login/'
+LOGIN_URL = '/accounts/login/'
 # перенаправление пользователя после успешного входа на сайт
 LOGIN_REDIRECT_URL = '/'
+
+# регистрация и вход по почте
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
