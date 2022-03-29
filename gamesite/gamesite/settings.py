@@ -133,8 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # для регистрации пользователей
 # адрес, где находится шаблон аутентификации
-# после подтверждения по почте перейдем сюда
-# LOGIN_URL = 'sign/login/'
 LOGIN_URL = '/accounts/login/'
 # перенаправление пользователя после успешного входа на сайт
 LOGIN_REDIRECT_URL = '/'

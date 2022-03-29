@@ -1,4 +1,5 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ ************************************************"""
+from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -78,28 +79,25 @@ class NoteDetail(DetailView):
         form.instance - для автоматического заполнения полей формы"""
         form = ResponseForm(request.POST)
         if form.is_valid():
+            print('111')
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_response = self.request.user
             form.save()
+            print('222')
 
-
-
-
-
+            # если создан новый отклик, то автору письма отправить письмо
+            send_mail(subject='тема письма', message='сообщение письма',
+                      from_email='factoryskill@yandex.ru', recipient_list=['ges1987@list.ru'])
+            print('333')
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
-
-
-
-
 
 
 class NoteEdit(UpdateView):
     """Редактирование объявления"""
     template_name = 'note_edit.html'
     form_class = NoteForm
-
 
     def get_object(self, **kwargs):
         """Помогает получить объект и вывести его на страницу"""
