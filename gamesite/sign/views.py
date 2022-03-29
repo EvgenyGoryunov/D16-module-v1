@@ -20,7 +20,5 @@ class UserProfile(UpdateView):
     success_url = reverse_lazy('main')
 
     def get_object(self, **kwargs):
-        """Помогает получить объект и вывести его на страницу
-        обязательный метод для представления UpdateView"""
         user = self.request.user
         return User.objects.get(username=user)
