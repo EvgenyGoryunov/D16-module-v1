@@ -60,7 +60,7 @@ class NoteDetail(DetailView):
             context['pole_response'] = False
             context['message_response'] = False
             context['edit_delete'] = True
-        # если ты уже сделал отклик - поле скрыть
+        # если ты уже сделал отклик - поле отклика скрыть
         elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
             context['pole_response'] = False
             context['message_response'] = True
@@ -82,9 +82,17 @@ class NoteDetail(DetailView):
             form.instance.user_response = self.request.user
             form.save()
 
+
+
+
+
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+
 
 
 class NoteEdit(UpdateView):
