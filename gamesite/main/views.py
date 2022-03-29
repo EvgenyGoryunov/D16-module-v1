@@ -83,11 +83,16 @@ class NoteDetail(DetailView):
             form.instance.user_response = self.request.user
             form.save()
 
-            # если создан новый отклик, то автору письма отправить письмо
+            # если создан новый отклик, то автору письма отправить письмо-уведомление
+            user = f'{self.request.user.first_name} {self.request.user.last_name}'
+            print(user)
             user_id = Note.objects.get(pk=self.kwargs.get('pk')).user_id
             email = User.objects.get(pk=user_id).email
-            send_mail(subject='тема письма', message='сообщение письма',
-                      from_email='factoryskill@yandex.ru', recipient_list=[email, ])
+
+            message = f'{self.request.user.first_name} {self.request.user.last_name}'
+
+            # send_mail(subject=f'У Вас новый отклик от {user}', message='сообщение письма',
+            #           from_email='factoryskill@yandex.ru', recipient_list=[email, ])
             print('333')
 
             # волшебная ссылка перехода на ту же самую страницу после
