@@ -79,16 +79,17 @@ class NoteDetail(DetailView):
         form.instance - для автоматического заполнения полей формы"""
         form = ResponseForm(request.POST)
         if form.is_valid():
-            print('111')
             form.instance.note_id = self.kwargs.get('pk')
             form.instance.user_response = self.request.user
             form.save()
-            print('222')
 
             # если создан новый отклик, то автору письма отправить письмо
+            user_id = Note.objects.get(pk=self.kwargs.get('pk')).user_id
+            email = User.objects.get(pk=user_id).email
             send_mail(subject='тема письма', message='сообщение письма',
-                      from_email='factoryskill@yandex.ru', recipient_list=['ges1987@list.ru'])
+                      from_email='factoryskill@yandex.ru', recipient_list=[email, ])
             print('333')
+
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
