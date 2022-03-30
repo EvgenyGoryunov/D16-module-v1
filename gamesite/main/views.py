@@ -90,6 +90,7 @@ class NoteDetail(DetailView):
             user = f'{self.request.user.first_name} {self.request.user.last_name}'
             user_id = Note.objects.get(pk=pk).user_id
             note_title = Note.objects.get(pk=pk).title
+            # важный способ получения чистого значения из QuerySet запроса при filter (values('id').[0].get('id'))
             response_last_id = Response.objects.filter(user_response=self.request.user). \
                 filter(note=pk).values('id')[0].get('id')
             response_content = Response.objects.get(pk=response_last_id).content
@@ -147,7 +148,6 @@ class ResponseList(ListView):
     template_name = 'user_response.html'
     context_object_name = 'responses'
     ordering = ['-datetime']
-    paginate_by = 5
 
     def get_queryset(self, **kwargs):
         """Создает фильтры для вывода нужных объектов, 1 фильтр - по текущему пользователю
@@ -186,7 +186,6 @@ class ResponseAccept(View):
         # если отклик принят, то автору отклика отправить письмо-уведомление
         # получение нужных объектов из БД
         pk = self.kwargs.get('pk')
-        user = f'{self.request.user.first_name} {self.request.user.last_name}'
         note_title = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).title
         note_id = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).id
         response_time = Response.objects.get(pk=pk).datetime
