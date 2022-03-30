@@ -44,7 +44,7 @@ class NoteDetail(DetailView):
     template_name = 'note_detail.html'
     queryset = Note.objects.all()
     form = ResponseForm
-    # вариант2 добавления переменной в контекст шаблона
+    # вариант2 - добавления переменной в контекст шаблона
     extra_context = {'form': ResponseForm}
 
     def get_context_data(self, **kwargs):
@@ -56,7 +56,7 @@ class NoteDetail(DetailView):
         pk = self.kwargs.get('pk')
         note_author = Note.objects.get(id=pk).user
 
-        # если ты автор объявления, то скрыть поле отклика
+        # если ты автор объявления, то скрыть поле ввода отклика
         if note_author == self.request.user:
             context['pole_response'] = False
             context['message_response'] = False
@@ -66,7 +66,7 @@ class NoteDetail(DetailView):
             context['pole_response'] = False
             context['message_response'] = True
             context['edit_delete'] = False
-        # если ты не автор объявления, и не сделал отклик - поле видимо
+        # если ты не автор объявления, и не сделал отклик ранее - поле видимо
         else:
             context['pole_response'] = True
             context['message_response'] = False
@@ -76,7 +76,8 @@ class NoteDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         """При отправки формы выполнить следующий код
-        form.instance - для автоматического заполнения полей формы"""
+        form.instance - для автоматического заполнения (переопределения) полей формы
+        instance - типа данный объект, вроде self, но со своими особенностями"""
         form = ResponseForm(request.POST)
         if form.is_valid():
             form.instance.note_id = self.kwargs.get('pk')
