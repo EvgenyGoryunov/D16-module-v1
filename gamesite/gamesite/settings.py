@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
+    # отправка писем по расписанию (рассылка)
+    'django_apscheduler'
+
 ]
 
 DEFAULT_FROM_EMAIL = 'factoryskill@yandex.ru'
@@ -144,9 +147,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-
 ACCOUNT_AUTHENTIFICTION_METHOD = 'email'
-
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
