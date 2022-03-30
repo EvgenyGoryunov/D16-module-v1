@@ -1,4 +1,4 @@
-"""************************************************* ПРЕДСТАВЛЕНИЯ ************************************************"""
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -55,22 +55,25 @@ class NoteDetail(DetailView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
         note_author = Note.objects.get(id=pk).user
+        current_user = self.request.user
 
-        # если ты автор объявления, то скрыть поле ввода отклика
-        if note_author == self.request.user:
-            context['pole_response'] = False
-            context['message_response'] = False
-            context['edit_delete'] = True
-        # если ты уже сделал отклик - поле отклика скрыть
-        elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
-            context['pole_response'] = False
-            context['message_response'] = True
-            context['edit_delete'] = False
-        # если ты не автор объявления, и не сделал отклик ранее - поле видимо
-        else:
-            context['pole_response'] = True
-            context['message_response'] = False
-            context['edit_delete'] = False
+        # проверка на то, что ты зарегистрированный пользователь
+        if current_user.is_authenticated:
+            # если ты автор объявления, то скрыть поле ввода отклика
+            if note_author == self.request.user:
+                context['pole_response'] = False
+                context['message_response'] = False
+                context['edit_delete'] = True
+            # если ты уже ранее сделал отклик - поле отклика скрыть
+            elif Response.objects.filter(user_response=self.request.user).filter(note=pk).exists():
+                context['pole_response'] = False
+                context['message_response'] = True
+                context['edit_delete'] = False
+            # если ты не автор объявления, и не сделал отклик ранее - поле видимо
+            else:
+                context['pole_response'] = True
+                context['message_response'] = False
+                context['edit_delete'] = False
 
         return context
 
@@ -222,3 +225,42 @@ class ResponseRemove(View):
         qaz.save()
 
         return redirect('response')
+
+
+# блокировка представлений от действий незарегистрированных пользователей
+class ProtectNoteCreate(LoginRequiredMixin, NoteCreate):
+    permission_required = ('create',)
+
+
+class ProtectNoteDelete(LoginRequiredMixin, NoteDelete):
+    permission_required = ('delete',)
+
+
+class ProtectNoteEdit(LoginRequiredMixin, NoteEdit):
+    permission_required = ('edit',)
+
+
+class ProtectResponseList(LoginRequiredMixin, ResponseList):
+    permission_required = ('response',)
+
+
+class ProtectResponseAccept(LoginRequiredMixin, ResponseAccept):
+    permission_required = ('accept',)
+
+
+class ProtectResponseRemove(LoginRequiredMixin, ResponseRemove):
+    permission_required = ('remove',)
+
+
+
+
+#
+# class ProtectedView(LoginRequiredMixin, NoteMain):
+#     template_name = 'prodected_page.html'
+
+# class ChangeNews(PermissionRequiredMixin, NewsEdit):
+#     permission_required = ('newapp.change_post',)
+#
+#
+# class DeleteNews(PermissionRequiredMixin, NewsDelete):
+#     permission_required = ('newapp.delete_post',)
