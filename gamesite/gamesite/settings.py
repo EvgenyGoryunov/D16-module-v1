@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     # основное приложение
-    'main',
+    # 'main',
 
     # регистрация пользователей
     'sign',
@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
+    # чтоб сигналы работали (выше django_apscheduler должно быть) + закомментировать 'main'
+    'main.apps.MainConfig',
+
     # отправка писем по расписанию (рассылка)
     'django_apscheduler'
-
 ]
 
 DEFAULT_FROM_EMAIL = 'factoryskill@yandex.ru'
