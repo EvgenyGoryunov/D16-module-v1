@@ -88,6 +88,7 @@ TEMPLATES = [
 # для аутентификации пользователя через почту
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+
     # метод аутентификации через почту
     'allauth.account.auth_backends.AuthenticationBackend',
 ]

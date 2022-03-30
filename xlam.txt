@@ -1,3 +1,58 @@
+
+        # # если отклик принят, то автору отклика отправить письмо-уведомление
+        # # получение нужных объектов из БД
+        # pk = self.kwargs.get('pk')
+        # note_title = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).title
+        # note_id = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).id
+        # response_time = Response.objects.get(pk=pk).datetime
+        #
+        # # формирование письма автору отклика
+        # title = f'У вас одобренный отклик на объявление "{str(note_title)[:15]}"'
+        # msg = f'На ваш отклик от {str(response_time)[:19]} на объявление "{note_title}" пришло положительное ' \
+        #       f'подтверждение. Перейти на объявление http://127.0.0.1:8000/detail/{note_id}'
+        # email = 'factoryskill@yandex.ru'
+        # response_email = User.objects.get(pk=Response.objects.get(pk=pk).user_response_id).email
+        #
+        # send_mail(subject=title, message=msg, from_email=email, recipient_list=[response_email, ])
+        #
+        # print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")
+        # print('Тема письма:', title)
+        # print('Контент письма:', msg)
+        # print('Адрес почты сервера:', email)
+        # print('Адрес отправления:', response_email)
+        # print("\n************************************ КОНЕЦ ПИСЬМА ********************************************\n")
+
+
+       #
+            # # если создан новый отклик, то автору письма отправить письмо-уведомление
+            # # получение нужных объектов из БД
+            # pk = self.kwargs.get('pk')
+            # user = f'{self.request.user.first_name} {self.request.user.last_name}'
+            # user_id = Note.objects.get(pk=pk).user_id
+            # note_title = Note.objects.get(pk=pk).title
+            # # важный способ получения чистого значения из QuerySet запроса при filter (values('id').[0].get('id'))
+            # response_last_id = Response.objects.filter(user_response=self.request.user). \
+            #     filter(note=pk).values('id')[0].get('id')
+            # response_content = Response.objects.get(pk=response_last_id).content
+            # response_time = Response.objects.get(pk=response_last_id).datetime
+            #
+            # # формирование письма автору объявления
+            # title = f'У вас новый отклик от {str(user)[:15]}'
+            # msg = f'На ваше объявление "{note_title}" пришел {str(response_time)[:19]} новый отклик от {user} ' \
+            #       f'следующего содержания: {response_content}. Перейти в отклики http://127.0.0.1:8000/response/'
+            # email = 'factoryskill@yandex.ru'
+            # note_email = User.objects.get(pk=user_id).email
+            #
+            # send_mail(subject=title, message=msg, from_email=email, recipient_list=[note_email, ])
+            #
+            # print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) *********************\n")
+            # print('Тема письма:', title)
+            # print('Контент письма:', msg)
+            # print('Адрес почты сервера:', email)
+            # print('Адрес отправления:', note_email)
+            # print("\n************************************ КОНЕЦ ПИСЬМА ********************************************\n")
+
+
 <!--код для пагинации-->
 {% if is_paginated %}
 {% if page_obj.has_previous %}

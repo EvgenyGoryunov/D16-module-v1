@@ -8,10 +8,14 @@ from .models import Response, Note
 
 @receiver(post_save, sender=Response)
 def send_msg(instance, created, **kwargs):
+    """функция-сигнал, которая срабатывает, когда в модель Response (отклики) вносятся изменения
+    если создается новая запись (if created), то автору объявления отправляется письмо-уведомление,
+    если автор объявления принимает отклик (elif instance.status_add), то автору отклика идет письмо"""
     user = User.objects.get(pk=instance.user_response_id)
     pk_pesponse = instance.id
     if created:
         # если создан новый отклик, то автору письма отправить письмо-уведомление
+
         pk_note = instance.note_id
         user = f'{user.first_name} {user.last_name}'
         user_id = Note.objects.get(pk=pk_note).user_id
@@ -28,6 +32,7 @@ def send_msg(instance, created, **kwargs):
         email = 'factoryskill@yandex.ru'
         note_email = User.objects.get(pk=user_id).email
 
+        # функция отправки письма (простой вариант)
         send_mail(subject=title, message=msg, from_email=email, recipient_list=[note_email, ])
 
         print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) *********************\n")
@@ -39,6 +44,7 @@ def send_msg(instance, created, **kwargs):
 
     elif instance.status_add:
         # если отклик принят, то автору отклика отправить письмо-уведомление
+
         note_title = Note.objects.get(pk=Response.objects.get(pk=pk_pesponse).note_id).title
         note_id = Note.objects.get(pk=Response.objects.get(pk=pk_pesponse).note_id).id
         response_time = Response.objects.get(pk=pk_pesponse).datetime
@@ -50,6 +56,7 @@ def send_msg(instance, created, **kwargs):
         email = 'factoryskill@yandex.ru'
         response_email = User.objects.get(pk=Response.objects.get(pk=pk_pesponse).user_response_id).email
 
+        # функция отправки письма (простой вариант)
         send_mail(subject=title, message=msg, from_email=email, recipient_list=[response_email, ])
 
         print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")

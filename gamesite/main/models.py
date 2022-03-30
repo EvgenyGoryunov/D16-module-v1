@@ -15,9 +15,8 @@ class Category(models.Model):
 
 class Note(models.Model):
     """Модель - объявления
-    поле content может содержать текст, фото, форматир текст, таблицы
-    поле user авто присваивает значение текущего пользователя
-    поле user_response содержит id_user откликнувшихся на данную статью"""
+    поле content может содержать текст, фото, форматированный текст, таблицы
+    поле user авто присваивает значение текущего пользователя"""
     title = models.CharField(max_length=128, verbose_name='Название')
     content = RichTextUploadingField(verbose_name='Контент')
     datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -37,7 +36,7 @@ class Response(models.Model):
     """Модель - отклики
     поле content содержит текст, например контакты в виде e-mail пользователя, либо телефон"""
     note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='Объявление')
-    user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='id_автора_отклика')
+    user_response = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор отклика')
     content = models.TextField(verbose_name='Контент отклика')
     datetime = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')
     status_del = models.BooleanField(default=False, verbose_name='Статус отклика - отклонен')
