@@ -144,12 +144,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-# Модуль 6.3 - подтверждение регистрации через почту
+
 ACCOUNT_AUTHENTIFICTION_METHOD = 'email'
 
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'factoryskill'
-EMAIL_HOST_PASSWORD = 'qazwsx963852'  # пароль от почты
+EMAIL_HOST_PASSWORD = 'qazwsx963852'
 EMAIL_USE_SSL = True

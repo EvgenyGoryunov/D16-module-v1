@@ -97,7 +97,7 @@ class NoteDetail(DetailView):
             # формирование письма автору объявления
             title = f'У вас новый отклик от {str(user)[:15]}'
             msg = f'На ваше объявление "{note_title}" пришел {str(response_time)[:19]} новый отклик от {user} ' \
-                  f'следующего содержания: {response_content}'
+                  f'следующего содержания: {response_content}. Перейти в отклики http://127.0.0.1:8000/response/'
             email = 'factoryskill@yandex.ru'
             note_email = User.objects.get(pk=user_id).email
 
@@ -153,7 +153,6 @@ class ResponseList(ListView):
         то есть выводятся объявления только текущего пользователя, 2,3 фильтры - по статусу
         то есть еще не отклоненные/не принятые ранее отклики"""
         user_id = self.request.user.id
-        # return Response.objects.all()
         return Response.objects.filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
 
     def get_context_data(self, **kwargs):
@@ -188,11 +187,13 @@ class ResponseAccept(View):
         pk = self.kwargs.get('pk')
         user = f'{self.request.user.first_name} {self.request.user.last_name}'
         note_title = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).title
+        note_id = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).id
         response_time = Response.objects.get(pk=pk).datetime
 
         # формирование письма автору отклика
         title = f'У вас одобренный отклик на объявление "{str(note_title)[:15]}"'
-        msg = f'На ваш отклик от {str(response_time)[:19]} на объявление "{note_title}" пришло подтверждение'
+        msg = f'На ваш отклик от {str(response_time)[:19]} на объявление "{note_title}" пришло положительное ' \
+              f'подтверждение. Перейти на объявление http://127.0.0.1:8000/detail/{note_id}'
         email = 'factoryskill@yandex.ru'
         response_email = User.objects.get(pk=Response.objects.get(pk=pk).user_response_id).email
 
