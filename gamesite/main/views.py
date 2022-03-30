@@ -1,5 +1,4 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ ************************************************"""
-from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -84,17 +83,33 @@ class NoteDetail(DetailView):
             form.save()
 
             # если создан новый отклик, то автору письма отправить письмо-уведомление
+            # получение нужных объектов из БД
+            pk = self.kwargs.get('pk')
             user = f'{self.request.user.first_name} {self.request.user.last_name}'
-            print(user)
-            user_id = Note.objects.get(pk=self.kwargs.get('pk')).user_id
-            email = User.objects.get(pk=user_id).email
+            user_id = Note.objects.get(pk=pk).user_id
+            note_title = Note.objects.get(pk=pk).title
+            response_last_id = Response.objects.filter(user_response=self.request.user). \
+                filter(note=pk).values('id')[0].get('id')
+            response_content = Response.objects.get(pk=response_last_id).content
+            response_time = Response.objects.get(pk=response_last_id).datetime
 
-            message = f'{self.request.user.first_name} {self.request.user.last_name}'
+            # формирование письма автору объявления
+            title = f'У вас новый отклик от {user}'
+            msg = f'На ваше объявление "{note_title}" пришел {str(response_time)[:19]} новый отклик от {user} ' \
+                  f'следующего содержания: {response_content}'
+            email = 'factoryskill@yandex.ru'
+            note_email = User.objects.get(pk=user_id).email
 
-            # send_mail(subject=f'У Вас новый отклик от {user}', message='сообщение письма',
-            #           from_email='factoryskill@yandex.ru', recipient_list=[email, ])
-            print('333')
+            # send_mail(subject=title, message=msg, from_email=email, recipient_list=[note_email, ])
 
+            print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")
+
+            print('Тема письма:', title)
+            print('Контент письма:', msg)
+            print('Адрес отправки (от кого):', email)
+            print('Адрес приема (кому):', note_email)
+
+            print("\n************************************ КОНЕЦ ПИСЬМА ********************************************\n")
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
