@@ -16,11 +16,11 @@ def send_msg(instance, created, **kwargs):
     if created:
         # если создан новый отклик, то автору письма отправить письмо-уведомление
 
+        # формирование нужный значений для письма
         pk_note = instance.note_id
         user = f'{user.first_name} {user.last_name}'
         user_id = Note.objects.get(pk=pk_note).user_id
         note_title = Note.objects.get(pk=pk_note).title
-
         response_content = Response.objects.get(pk=pk_pesponse).content
         response_time = Response.objects.get(pk=pk_pesponse).datetime
 
@@ -49,14 +49,12 @@ def send_msg(instance, created, **kwargs):
         note_id = Note.objects.get(pk=Response.objects.get(pk=pk_pesponse).note_id).id
         response_time = Response.objects.get(pk=pk_pesponse).datetime
 
-        # формирование письма автору отклика
         title = f'У вас одобренный отклик на объявление "{str(note_title)[:15]}"'
         msg = f'На ваш отклик от {str(response_time)[:19]} на объявление "{note_title}" пришло положительное ' \
               f'подтверждение. Перейти на объявление http://127.0.0.1:8000/detail/{note_id}'
         email = 'factoryskill@yandex.ru'
         response_email = User.objects.get(pk=Response.objects.get(pk=pk_pesponse).user_response_id).email
 
-        # функция отправки письма (простой вариант)
         send_mail(subject=title, message=msg, from_email=email, recipient_list=[response_email, ])
 
         print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")

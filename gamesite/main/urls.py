@@ -11,7 +11,7 @@ urlpatterns = [
       path('ckeditor', include('ckeditor_uploader.urls')),
       path('detail/<int:pk>/', NoteDetail.as_view(), name='detail'),
 
-      # заблокированные представления
+      # заблокированные представления (только после аутентификации)
       path('create/', ProtectNoteCreate.as_view(), name='create'),
       path('delete/<int:pk>', ProtectNoteDelete.as_view(), name='delete'),
       path('edit/<int:pk>', ProtectNoteEdit.as_view(), name='edit'),

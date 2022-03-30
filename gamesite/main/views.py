@@ -43,7 +43,7 @@ class NoteDetail(DetailView):
     template_name = 'note_detail.html'
     queryset = Note.objects.all()
     form = ResponseForm
-    # вариант2 - добавления переменной в контекст шаблона
+    # простой вариант добавления переменной в шаблон
     extra_context = {'form': ResponseForm}
 
     def get_context_data(self, **kwargs):
@@ -56,7 +56,7 @@ class NoteDetail(DetailView):
         note_author = Note.objects.get(id=pk).user
         current_user = self.request.user
 
-        # проверка на то, что ты зарегистрированный пользователь
+        # проверка на то, что ты - зарегистрированный пользователь
         if current_user.is_authenticated:
             # если ты автор объявления, то скрыть поле ввода отклика
             if note_author == self.request.user:
@@ -97,7 +97,7 @@ class NoteEdit(UpdateView):
     form_class = NoteForm
 
     def get_object(self, **kwargs):
-        """Помогает получить объект и вывести его на страницу"""
+        """Помогает получить нужный объект и вывести его на страницу"""
         pk = self.kwargs.get('pk')
         return Note.objects.get(pk=pk)
 
@@ -150,7 +150,7 @@ class ResponseAccept(View):
 
     def get(self, request, *args, **kwargs):
         """Присваивает полю status_add значение = 1, то есть True, означает, что отклик
-        принят, то есть он остается в бд, но больше не отображается в общем списке"""
+        принят, то есть он остается в бд, но больше не отображается в списке новых откликов"""
         pk = self.kwargs.get('pk')
         resp = Response.objects.get(pk=pk)
         resp.status_add = 1
@@ -165,7 +165,7 @@ class ResponseRemove(View):
 
     def get(self, request, *args, **kwargs):
         """Присваивает полю status_del значение = 1, то есть True, означает, что отклик
-        отклонен, то есть он остается в бд, но больше не отображается в общем списке"""
+        отклонен, то есть он остается в бд, но больше не отображается в списке новых откликов"""
         pk = self.kwargs.get('pk')
         qaz = Response.objects.get(id=pk)
         qaz.status_del = 1
