@@ -1,4 +1,5 @@
 """************************************************* ПРЕДСТАВЛЕНИЯ ************************************************"""
+from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -47,7 +48,7 @@ class NoteDetail(DetailView):
     extra_context = {'form': ResponseForm}
 
     def get_context_data(self, **kwargs):
-        """Функция для видимости поля откликов, поле не видимо если
+        """Функция для видимости поля откликов, поле не видимо если:
         1) я - автор объявления (самому себе отклик отправлять не нужно)
         2) уже отправил отклик на объявление ранее (два раза нельзя отправлять отклик на одно
         и тоже объявление, от спама и прочего)"""
@@ -94,22 +95,21 @@ class NoteDetail(DetailView):
             response_time = Response.objects.get(pk=response_last_id).datetime
 
             # формирование письма автору объявления
-            title = f'У вас новый отклик от {user}'
+            title = f'У вас новый отклик от {str(user)[:15]}'
             msg = f'На ваше объявление "{note_title}" пришел {str(response_time)[:19]} новый отклик от {user} ' \
                   f'следующего содержания: {response_content}'
             email = 'factoryskill@yandex.ru'
             note_email = User.objects.get(pk=user_id).email
 
-            # send_mail(subject=title, message=msg, from_email=email, recipient_list=[note_email, ])
+            send_mail(subject=title, message=msg, from_email=email, recipient_list=[note_email, ])
 
-            print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")
-
+            print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) *********************\n")
             print('Тема письма:', title)
             print('Контент письма:', msg)
-            print('Адрес отправки (от кого):', email)
-            print('Адрес приема (кому):', note_email)
-
+            print('Адрес почты сервера:', email)
+            print('Адрес отправления:', note_email)
             print("\n************************************ КОНЕЦ ПИСЬМА ********************************************\n")
+
             # волшебная ссылка перехода на ту же самую страницу после
             # выполнения POST-запроса, хвала stackoverflow.com
             return redirect(request.META.get('HTTP_REFERER'))
@@ -153,6 +153,7 @@ class ResponseList(ListView):
         то есть выводятся объявления только текущего пользователя, 2,3 фильтры - по статусу
         то есть еще не отклоненные/не принятые ранее отклики"""
         user_id = self.request.user.id
+        # return Response.objects.all()
         return Response.objects.filter(note__user=user_id).filter(status_del=False).filter(status_add=False)
 
     def get_context_data(self, **kwargs):
@@ -177,10 +178,33 @@ class ResponseAccept(View):
         """Присваивает полю status_add значение = 1, то есть True, означает, что отклик
         принят, то есть он остается в бд, но больше не отображается в общем списке"""
         pk = self.kwargs.get('pk')
-        qaz = Response.objects.get(id=pk)
-        qaz.status_add = 1
-        qaz.status_del = 0
-        qaz.save()
+        resp = Response.objects.get(pk=pk)
+        resp.status_add = 1
+        resp.status_del = 0
+        resp.save()
+
+        # если отклик принят, то автору отклика отправить письмо-уведомление
+        # получение нужных объектов из БД
+        pk = self.kwargs.get('pk')
+        user = f'{self.request.user.first_name} {self.request.user.last_name}'
+        note_title = Note.objects.get(pk=Response.objects.get(pk=pk).note_id).title
+        response_time = Response.objects.get(pk=pk).datetime
+
+        # формирование письма автору отклика
+        title = f'У вас одобренный отклик на объявление "{str(note_title)[:15]}"'
+        msg = f'На ваш отклик от {str(response_time)[:19]} на объявление "{note_title}" пришло подтверждение'
+        email = 'factoryskill@yandex.ru'
+        response_email = User.objects.get(pk=Response.objects.get(pk=pk).user_response_id).email
+
+        send_mail(subject=title, message=msg, from_email=email, recipient_list=[response_email, ])
+
+        print("\n*************** ВЫВОД ПИСЬМА В КОНСОЛЬ (для удобства тестирования почты) **********************\n")
+        print('Тема письма:', title)
+        print('Контент письма:', msg)
+        print('Адрес почты сервера:', email)
+        print('Адрес отправления:', response_email)
+        print("\n************************************ КОНЕЦ ПИСЬМА ********************************************\n")
+
         return redirect('response')
 
 

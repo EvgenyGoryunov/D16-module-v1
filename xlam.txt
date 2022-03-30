@@ -1,3 +1,8 @@
+    # path('logout/', LogoutView.as_view(template_name='sign/logout.html'), name='logout'),
+        # path('login/', LoginView.as_view(template_name='sign/login.html'), name='login'),
+            # path('registration/', UserRegistration.as_view(), name='registration'),
+
+
                             <!-- <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>-->
 
                             <!-- <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>-->
