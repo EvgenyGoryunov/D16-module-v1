@@ -24,16 +24,29 @@
         <table>
             <tr>
                 <td width="800">
-                    <!-- название сайта -->
-                    <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>
 
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
+
+                            <!-- название сайта -->
+                            <a class="navbar-brand" href="{% url 'main' %}">-= Game Site =-</a>
+
                             <!-- кнопки - ссылки на страницы -->
+                            <!-- через {% if request.user.username %}{% endif %} происходит уборка лишних кнопок,
+                            для незарегистрированных пользователей-->
+
+                            <li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Главная</a></li>
+
+                            {% if request.user.username %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Создать</a></li>
+                            {% endif %}
+
                             <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Поиск</a></li>
+
+                            {% if request.user.username %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'response' %}">Отклики</a></li>
                             <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin">Админка</a></li>
+                            {% endif %}
 
                             {% if not request.user.username %}
                             <li class="nav-item"><a class="nav-link"

@@ -228,6 +228,7 @@ class ResponseRemove(View):
 
 
 # блокировка представлений от действий незарегистрированных пользователей
+
 class ProtectNoteCreate(LoginRequiredMixin, NoteCreate):
     permission_required = ('create',)
 
@@ -250,17 +251,3 @@ class ProtectResponseAccept(LoginRequiredMixin, ResponseAccept):
 
 class ProtectResponseRemove(LoginRequiredMixin, ResponseRemove):
     permission_required = ('remove',)
-
-
-
-
-#
-# class ProtectedView(LoginRequiredMixin, NoteMain):
-#     template_name = 'prodected_page.html'
-
-# class ChangeNews(PermissionRequiredMixin, NewsEdit):
-#     permission_required = ('newapp.change_post',)
-#
-#
-# class DeleteNews(PermissionRequiredMixin, NewsDelete):
-#     permission_required = ('newapp.delete_post',)
